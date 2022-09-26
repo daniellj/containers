@@ -1,0 +1,102 @@
+FROM ubuntu:latest
+
+# Updates e instalações
+RUN \
+  apt-get update && apt-get install -y \
+  openssh-server \
+  python3 \
+  rsync \
+  sudo \
+  arp-scan \
+  net-tools \
+  iputils-ping \
+  vim \
+  && apt-get clean
+
+# Cria usuário para a instalação do Hadoop
+RUN useradd -m zookeeper && echo "zookeeper:supergroup" | chpasswd && adduser zookeeper sudo && echo "zookeeper ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && cd /usr/bin/ && sudo ln -s python3 python
+
+# Copia o arquivo de configuração do ssh
+ADD ./config-files/ssh_config /etc/ssh/ssh_config
+
+# Muda o usuário
+USER zookeeper
+
+# Cria a chave ssh
+#RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && chmod 0600 ~/.ssh/authorized_keys
+
+# Copia os binários do JDK
+ADD ./binaries/jdk /opt/jdk
+
+# Variáveis de ambiente JDK
+ENV JAVA_HOME=/opt/jdk
+ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin
+
+# Copia os binários do apache-zookeeper
+COPY ./binaries/apache-zookeeper-3.7.1-bin.tar.gz /opt
+RUN sudo tar -xvf /opt/apache-zookeeper-3.7.1-bin.tar.gz -C /opt
+RUN sudo mv /opt/apache-zookeeper-3.7.1-bin /opt/apache-zookeeper
+RUN sudo rm -rf /opt/apache-zookeeper-3.7.1-bin.tar.gz
+
+# deleta o(s) arquivo(s) configuração do apache-zookeeper se existir(em)
+RUN sudo rm -rf /opt/apache-zookeeper/conf/zoo.cfg
+RUN sudo rm -rf /etc/init.d/zookeeper
+
+# Cria uma pasta para arquivos temporários do apache-zookeeper
+RUN sudo mkdir /data
+RUN sudo mkdir /data/zookeeper
+
+# Copia os arquivos de configuração do apache-zookeeper
+ADD ./config-files/zoo.cfg /opt/apache-zookeeper/conf/zoo.cfg
+ADD ./config-files/zookeeper /etc/init.d/zookeeper
+RUN sudo touch /data/zookeeper/myid
+
+# Muda o usuário
+USER root
+RUN echo "3" > /data/zookeeper/myid
+
+# Muda o usuário
+USER zookeeper
+
+# adjust/clean format shell script file for apache-zookeeper
+RUN sudo sed -i -e 's/\r$//' /opt/apache-zookeeper/conf/zoo.cfg
+RUN sudo sed -i -e 's/\r$//' /etc/init.d/zookeeper
+RUN sudo sed -i -e 's/\r$//' /data/zookeeper/myid
+
+# Variáveis de ambiente do apache-zookeeper
+ENV ZOOKEEPER_HOME=/opt/apache-zookeeper
+ENV PATH=$PATH:$ZOOKEEPER_HOME:$ZOOKEEPER_HOME/bin
+
+# ~/.bashrc
+RUN echo "export JAVA_HOME=/opt/jdk" >> ~/.bashrc
+RUN echo "export ZOOKEEPER_HOME=/opt/apache-zookeeper" >> ~/.bashrc
+RUN echo "export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$ZOOKEEPER_HOME:$ZOOKEEPER_HOME/bin" >> ~/.bashrc
+
+# Copia os arquivos de configuração da inicialização do container
+ADD ./config-files/entrypoint-startup.sh /home/zookeeper/entrypoint-startup.sh
+
+# adjust/clean format shell script file for startup
+RUN sudo sed -i -e 's/\r$//' /home/zookeeper/entrypoint-startup.sh
+
+# Muda o usuário
+USER root
+
+# Ajuste dos privilégios
+RUN sudo chown -R zookeeper:zookeeper /home/zookeeper/
+RUN sudo chown -R zookeeper:zookeeper /data
+RUN sudo chmod 770 -R /data
+RUN sudo chown -R zookeeper:zookeeper /opt/jdk
+RUN sudo chown -R zookeeper:zookeeper /opt/apache-zookeeper
+RUN sudo chown -R zookeeper:zookeeper /home/zookeeper/entrypoint-startup.sh
+RUN sudo chmod +x /home/zookeeper/entrypoint-startup.sh
+RUN sudo chown root:root /etc/init.d/zookeeper
+RUN sudo chmod 0755 /etc/init.d/zookeeper
+RUN sudo update-rc.d zookeeper defaults
+
+# Muda o usuário
+USER zookeeper
+
+# Pasta de trabalho
+WORKDIR /home/zookeeper
+
+ENTRYPOINT ["/home/zookeeper/entrypoint-startup.sh"]

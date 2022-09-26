@@ -1,0 +1,55 @@
+#!/bin/bash
+#/etc/init.d/kafka
+DAEMON_PATH=/opt/apache-kafka/bin
+DAEMON_NAME=kafka
+BROKER_ID=2
+SERVER_PROPERTIES=02
+# Check that networking is up.
+#[ ${NETWORKING} = "no" ] && exit 0
+
+PATH=$PATH:$DAEMON_PATH
+
+# See how we were called.
+case "$1" in
+start)
+# Start daemon.
+pid=`ps ax | grep -i 'kafka.Kafka /opt/apache-kafka/config/server-02.properties' | grep -v grep | awk '{print $1}'`
+if [ -n "$pid" ]
+then
+echo "Kafka is already running for broker.id=$BROKER_ID"
+echo "PID=$(ps ax | grep -i 'kafka.Kafka /opt/apache-kafka/config/server-02.properties' | grep -v grep | awk '{print $1}')"
+else
+######
+echo "Starting $DAEMON_NAME for broker.id=$BROKER_ID"
+nohup $DAEMON_PATH/kafka-server-start.sh /opt/apache-kafka/config/server-$SERVER_PROPERTIES.properties &>/dev/null &
+#$DAEMON_PATH/kafka-server-start.sh /opt/apache-kafka/config/server-$SERVER_PROPERTIES.properties
+sleep 10
+echo "PID=$(ps ax | grep -i 'kafka.Kafka /opt/apache-kafka/config/server-02.properties' | grep -v grep | awk '{print $1}')"
+######
+fi
+;;
+stop)
+echo "Shutting down $DAEMON_NAME for broker.id=$BROKER_ID"
+#nohup $DAEMON_PATH/kafka-server-stop.sh /opt/apache-kafka/config/server-$SERVER_PROPERTIES.properties &>/dev/null &
+$DAEMON_PATH/kafka-server-stop.sh /opt/apache-kafka/config/server-$SERVER_PROPERTIES.properties
+;;
+restart)
+$0 stop
+sleep 2
+$0 start
+;;
+status)
+pid=`ps ax | grep -i 'kafka.Kafka /opt/apache-kafka/config/server-02.properties' | grep -v grep | awk '{print $1}'`
+if [ -n "$pid" ]
+then
+echo "Kafka is Running as PID: $pid"
+else
+echo "Kafka is not Running"
+fi
+;;
+*)
+echo "Usage: $0 {start|stop|restart|status}"
+exit 1
+esac
+
+exit 0
