@@ -33,7 +33,7 @@ docker container exec -it datanode2 /bin/bash
 cat /home/hduser/.ssh/authorized_keys
 
 # nos dois datanodes, executar os passos à seguir substituindo o conteúdo entre aspas duplas pela saída do comando anterior (cat /home/hduser/.ssh/authorized_keys):
-echo "ssh-rsa XXXXXXXXXXXXXXXXXXXXXXXXXX" > /home/hduser/.ssh/authorized_keys
+echo "ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDcOakJhOiDOgViNevRKEpeID9MxbI+jCD2rTYHFFQRZzBs2E4OqSdAFJZ3wo+3liHOd3JuHC6qGmKzwaBSgiTMnrcMshL5xBDsez5JsgjYp8dnRMUlcF7hsuQo4jAe+Tt8DqiCxE7psITLV1Fn6SzECry7xqoSnhZd9o9mrI07mwJVLZCjH5N/VfSw+v41WVV77h6sE677T9jK/TKJU5tg/QxU+nBFIHUWEzdMCn+U4oHAxyDcA2dYtT5eKlDZBOsDEafOmr7xR3tFWCntJW973rd/uzRY1fzaTnfAheB3YABh41lvEh5rOXs4i5RytLrzSYQgwy2bfuBw3mleE1ZWey0YqF9m8d+z5sfZuWdu5rAtGOdM2tiUvcSkO0DM7vinxQW+ipDFTl7gO9es9q7Hisvf9YF8YOljutG1B7MYtlI/2eOusTeempaSI6jNlL9fYncZjxUCpUqTRWKZrK4EdWDpKnNlwvaMRRZDSeVXSMyxGHinn4LnuYt392yUnS0= hduser@buildkitsandbox" > /home/hduser/.ssh/authorized_keys
 
 # conferir o conteúdo
 cat /home/hduser/.ssh/authorized_keys

@@ -25,7 +25,7 @@ https://docs.docker.com/engine/reference/commandline/run/
 
 5- Acesse o container usando a CLI no Docker Desktop e execute as instruções abaixo:
 5.1 - para acessar o(s) container(s) recém criado(s):
-docker container exec -it hdpmaster /bin/bash
+docker container exec -it namenode /bin/bash
 
 # Para o serviço do hadoop:
 hdfs --daemon stop namenode
