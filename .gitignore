@@ -1,23 +1,39 @@
 # Private Files
 packages/*
+
 Cluster_Hadoop/DataNode/binaries/hadoop/*
 Cluster_Hadoop/DataNode/binaries/jdk/*
 Cluster_Hadoop/NameNode/binaries/hadoop/*
 Cluster_Hadoop/NameNode/binaries/jdk/*
-
 !Cluster_Hadoop/DataNode/binaries/hadoop/index.md
 !Cluster_Hadoop/DataNode/binaries/jdk/index.md
 !Cluster_Hadoop/NameNode/binaries/hadoop/index.md
 !Cluster_Hadoop/NameNode/binaries/jdk/index.md
+
 CoordinationDistributedEnvironments/ApacheZookeeper/binaries/jdk/*
-CoordinationDistributedEnvironments/ApacheZookeeper/binaries/apache-zookeeper-3.7.1-bin.tar.gz
+!CoordinationDistributedEnvironments/ApacheZookeeper/binaries/jdk/index.md
+
 ETL/ApacheNifi/binaries/apache-nifi/*
 ETL/ApacheNifi/binaries/jdk/*
-ETL/StreamSet/binaries/*
+!ETL/ApacheNifi/binaries/apache-nifi/index.md
+!ETL/ApacheNifi/binaries/jdk/index.md
+
+ETL/StreamSet/binaries/jdk/*
+ETL/StreamSet/binaries/StreamSetsDataCollector/*
+!ETL/StreamSet/binaries/jdk/index.md
+!ETL/StreamSet/binaries/StreamSetsDataCollector/index.md
+
 messaging-layer/ApacheKafka/binaries/apache-kafka/*
 messaging-layer/ApacheKafka/binaries/jdk/*
+!messaging-layer/ApacheKafka/binaries/apache-kafka/index.md
+!messaging-layer/ApacheKafka/binaries/jdk/index.md
+
 streaming-layer/ApacheFlume/binaries/apache-flume/*
 streaming-layer/ApacheFlume/binaries/jdk/*
+streaming-layer/ApacheFlume/binaries/hadoop-lib/*
+!streaming-layer/ApacheFlume/binaries/apache-flume/index.md
+!streaming-layer/ApacheFlume/binaries/jdk/index.md
+!streaming-layer/ApacheFlume/binaries/hadoop-lib/index.md
 
 # VSCode
 .vscode/*
