@@ -4,6 +4,11 @@ Cluster_Hadoop/DataNode/binaries/hadoop/*
 Cluster_Hadoop/DataNode/binaries/jdk/*
 Cluster_Hadoop/NameNode/binaries/hadoop/*
 Cluster_Hadoop/NameNode/binaries/jdk/*
+
+!Cluster_Hadoop/DataNode/binaries/hadoop/index.md
+!Cluster_Hadoop/DataNode/binaries/jdk/index.md
+!Cluster_Hadoop/NameNode/binaries/hadoop/index.md
+!Cluster_Hadoop/NameNode/binaries/jdk/index.md
 CoordinationDistributedEnvironments/ApacheZookeeper/binaries/jdk/*
 CoordinationDistributedEnvironments/ApacheZookeeper/binaries/apache-zookeeper-3.7.1-bin.tar.gz
 ETL/ApacheNifi/binaries/apache-nifi/*
