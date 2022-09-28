@@ -1,5 +1,3 @@
-# Preparação do NameNode
-
 1- Baixe e descompacte o arquivo zip disponível ao final do capítulo.
 
 2- Faça o download do Apache Hadoop e do JDK 8, coloque na pasta "binarios", descompacte os arquivos e renomeie as pastas. O procedimento é mostrado nas aulas.
