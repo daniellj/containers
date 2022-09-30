@@ -2,7 +2,7 @@ FROM ubuntu:latest
 
 # Updates e instalações
 RUN \
-  apt-get update && apt-get install -y \
+  apt-get update && apt-get upgrade && apt-get install -y \
   openssh-server \
   python3 \
   pip \
@@ -12,12 +12,17 @@ RUN \
   net-tools \
   iputils-ping \
   vim \
-  postgresql \
   libcppdb-postgresql0 \
   odbc-postgresql \
+  ca-certificates \
+  curl \
   && apt-get clean
 
-RUN dpkg --status postgresql
+RUN apt-get update && apt-get install -y \
+	postgresql \
+	postgresql-contrib \
+	postgresql-client \
+	&& apt-get clean
 
 # Cria usuário para a instalação do Hadoop
 RUN useradd -m postgresql && echo "postgresql:supergroup" | chpasswd && adduser postgresql sudo && echo "postgresql ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && cd /usr/bin/ && sudo ln -s python3 python
