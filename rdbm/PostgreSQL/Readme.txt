@@ -8,6 +8,9 @@ docker network create -d bridge dfs_net
 docker pull postgres
 docker run --net dfs_net --hostname postgresql-db --name postgresql -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 -p 5432:5432 postgres -d /bin/bash
 
+# Para acessar o banco de dados:
+docker container exec -it postgresql /bin/bash
+
 4 - Instalar o pgadmin
 docker pull dpage/pgadmin4:latest
 docker run -it -d --net dfs_net --hostname pgadmin --name pgadmin -p 6500:80 -e 'PGADMIN_DEFAULT_EMAIL=seu_email@dominio.com' -e 'PGADMIN_DEFAULT_PASSWORD=1234' -e 'PGADMIN_LISTEN_PORT=80' -d dpage/pgadmin4 /bin/bash
