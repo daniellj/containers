@@ -6,14 +6,14 @@ docker network create -d bridge dfs_net
 3 - Usar a imagem pronta do postgre
 
 docker pull postgres
-docker run --net dfs_net --hostname postgresql-db --name postgresql -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 -p 5432:5432 postgres -d /bin/bash
+docker run --net dfs_net --hostname postgresql-db --ip 172.19.0.6 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 --name postgresql -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=1234 -p 5432:5432 postgres -d /bin/bash
 
 # Para acessar o banco de dados:
 docker container exec -it postgresql /bin/bash
 
 4 - Instalar o pgadmin
 docker pull dpage/pgadmin4:latest
-docker run -it -d --net dfs_net --hostname pgadmin --name pgadmin -p 6500:80 -e 'PGADMIN_DEFAULT_EMAIL=seu_email@dominio.com' -e 'PGADMIN_DEFAULT_PASSWORD=1234' -e 'PGADMIN_LISTEN_PORT=80' -d dpage/pgadmin4 /bin/bash
+docker run -it -d --net dfs_net --hostname pgadmin --ip 172.19.0.7 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 --name pgadmin -p 6500:80 -e 'PGADMIN_DEFAULT_EMAIL=seu_email@dominio.com' -e 'PGADMIN_DEFAULT_PASSWORD=1234' -e 'PGADMIN_LISTEN_PORT=80' -d dpage/pgadmin4 /bin/bash
 
 5 - Após, acessar no navegador de internet o seguinte endereço:
 

@@ -18,9 +18,11 @@ docker network create -d bridge dfs_net
 
 4- Crie e inicialize o container com a instrução abaixo:
 
-docker run -it -d --net dfs_net --hostname zookeeper_worker_01 --name zookeeper_worker_01 apache_zookeeper_cluster1:hadoop_cluster /bin/bash
-docker run -it -d --net dfs_net --hostname zookeeper_worker_02 --name zookeeper_worker_02 apache_zookeeper_cluster2:hadoop_cluster /bin/bash
-docker run -it -d --net dfs_net --hostname zookeeper_worker_03 --name zookeeper_worker_03 apache_zookeeper_cluster3:hadoop_cluster /bin/bash
+docker run -it -d --net dfs_net --ip 172.19.0.2 --hostname zookeeper_worker_01 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 --name zookeeper_worker_01 apache_zookeeper_cluster1:hadoop_cluster /bin/bash
+
+docker run -it -d --net dfs_net --ip 172.19.0.3 --hostname zookeeper_worker_02 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 --name zookeeper_worker_02 apache_zookeeper_cluster2:hadoop_cluster /bin/bash
+
+docker run -it -d --net dfs_net --ip 172.19.0.4 --hostname zookeeper_worker_03 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 --name zookeeper_worker_03 apache_zookeeper_cluster3:hadoop_cluster /bin/bash
 
 # Documentação do doccker run:
 https://docs.docker.com/engine/reference/commandline/run/

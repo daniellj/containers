@@ -17,8 +17,9 @@ docker network ls
 
 4- Crie e inicialize o container de cada datanode (criaremos 2) com cada instrução abaixo:
 
-docker run -it -d --net dfs_net --hostname datanode1 --name datanode1 datanode:hadoop_cluster /bin/bash
-docker run -it -d --net dfs_net --hostname datanode2 --name datanode2 datanode:hadoop_cluster /bin/bash
+docker run -it -d --net dfs_net --ip 172.19.0.11 --hostname datanode1 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode2:172.19.0.12 --name datanode1 datanode:hadoop_cluster /bin/bash
+
+docker run -it -d --net dfs_net --ip 172.19.0.12 --hostname datanode2 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --name datanode2 datanode:hadoop_cluster /bin/bash
 
 # Documentação do doccker run:
 https://docs.docker.com/engine/reference/commandline/run/

@@ -16,11 +16,11 @@ docker network create -d bridge dfs_net
 
 4- Crie e inicialize o container com a instrução abaixo:
 
-docker run -it -d --net dfs_net --hostname nifi -p 59595:59595 --name apache_nifi apache_nifi:hadoop_cluster /bin/bash
+docker run -it -d --net dfs_net --hostname nifi --ip 172.19.0.9 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 -p 59595:59595 --name apache_nifi apache_nifi:hadoop_cluster /bin/bash
 
 ou usar a imagem pronta:
 
-docker run --name nifi -p 59595:59595 -d -e SINGLE_USER_CREDENTIALS_USERNAME=admin -e SINGLE_USER_CREDENTIALS_PASSWORD=rHkWR1gDNW3R9hgbeRsT3OM3Ue0zwGtQqcFKJD2EXWE -e NIFI_WEB_HTTPS_PORT='59595' apache/nifi:latest
+docker run --name nifi --ip 172.19.0.9 --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 -p 59595:59595 -d -e SINGLE_USER_CREDENTIALS_USERNAME=admin -e SINGLE_USER_CREDENTIALS_PASSWORD=rHkWR1gDNW3R9hgbeRsT3OM3Ue0zwGtQqcFKJD2EXWE -e NIFI_WEB_HTTPS_PORT='59595' apache/nifi:latest
 
 # Documentação do doccker run:
 https://docs.docker.com/engine/reference/commandline/run/

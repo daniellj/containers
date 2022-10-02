@@ -16,7 +16,7 @@ docker network create -d bridge dfs_net
 
 4- Crie e inicialize o container com a instrução abaixo:
 
-docker run -it -d --net dfs_net --hostname kafka -p 9092:9092 -p 9093:9093 -p 9094:9094 --name apache_kafka apache_kafka:hadoop_cluster /bin/bash
+docker run -it -d --net dfs_net --ip 172.19.0.5 --hostname kafka --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=hdpmaster:172.19.0.10 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 -p 9092:9092 -p 9093:9093 -p 9094:9094 --name apache_kafka apache_kafka:hadoop_cluster /bin/bash
 
 # Documentação do doccker run:
 https://docs.docker.com/engine/reference/commandline/run/
