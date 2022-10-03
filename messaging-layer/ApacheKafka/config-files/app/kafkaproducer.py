@@ -10,7 +10,7 @@ if __name__ == "__main__":
     host = hostname if hostname == hostserver else "127.0.0.1"
 
     conf = {
-     "bootstrap.servers": f"{host}:9092, {host}:9093, {host}:9094"
+     "bootstrap.servers": f"{host}:9092,{host}:9093,{host}:9094"
     }
 
     topic = "topic01"

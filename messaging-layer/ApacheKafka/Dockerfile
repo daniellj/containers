@@ -123,4 +123,4 @@ WORKDIR /home/kafka
 
 ENTRYPOINT ["/home/kafka/entrypoint-startup.sh"]
 
-EXPOSE 9092 9093 9094
+EXPOSE 19092 19093 19094
