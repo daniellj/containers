@@ -71,6 +71,7 @@ ENV ZOOKEEPER_HOME=/opt/apache-zookeeper
 ENV KAFKA_OPTS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf"
 ENV SERVER_JVMFLAGS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf"
 ENV ZOOKEEPER_OPTS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf"
+ENV EXTRA_ARGS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf"
 ENV PATH=$PATH:$ZOOKEEPER_HOME:$ZOOKEEPER_HOME/bin:$KAFKA_OPTS
 
 # ~/.bashrc
@@ -79,6 +80,7 @@ RUN echo "export ZOOKEEPER_HOME=/opt/apache-zookeeper" >> ~/.bashrc
 RUN echo "export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf""
 RUN echo "export SERVER_JVMFLAGS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf""
 RUN echo "export ZOOKEEPER_OPTS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf""
+RUN echo "export EXTRA_ARGS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf""
 RUN echo "export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$ZOOKEEPER_HOME:$ZOOKEEPER_HOME/bin:$KAFKA_OPTS" >> ~/.bashrc
 
 # Copia os arquivos de configuração da inicialização do container
