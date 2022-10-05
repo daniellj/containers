@@ -19,7 +19,7 @@ docker run -it -d --net dfs_net --hostname pgadmin --ip 172.19.0.7 --add-host=zo
 
 URL: 127.0.0.1:6500
 Login: seu_email@dominio.com
-Password: 1244
+Password: 1234
 
 6 - Criação de objetos de banco de dados
 -- create database objects
