@@ -18,16 +18,13 @@ echo "#################################"
 echo "stop Apache Zookeeper service..."
 #/opt/apache-zookeeper/bin/zkServer.sh stop /opt/apache-zookeeper/conf/zoo.cfg
 service zookeeper stop
+sleep 5
 
 echo "#################################"
 echo "start Apache Zookeeper service..."
 #/opt/apache-zookeeper/bin/zkServer.sh start /opt/apache-zookeeper/conf/zoo.cfg
 service zookeeper start
-
-echo "#################################"
-echo "restart Apache Zookeeper service..."
-#/opt/apache-zookeeper/bin/zkServer.sh restart /opt/apache-zookeeper/conf/zoo.cfg
-service zookeeper restart
+sleep 5
 
 echo "#################################"
 echo "check Apache Zookeeper service..."
