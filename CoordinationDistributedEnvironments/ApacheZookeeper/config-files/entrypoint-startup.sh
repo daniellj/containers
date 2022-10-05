@@ -6,7 +6,8 @@ export JAVA_HOME=/opt/jdk
 export ZOOKEEPER_HOME=/opt/apache-zookeeper
 export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf"
 export SERVER_JVMFLAGS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf"
-export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$ZOOKEEPER_HOME:$ZOOKEEPER_HOME/bin:$KAFKA_OPTS:$SERVER_JVMFLAGS
+export ZOOKEEPER_OPTS="-Djava.security.auth.login.config=/opt/apache-zookeeper/conf/zoo_jaas.conf"
+export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$ZOOKEEPER_HOME:$ZOOKEEPER_HOME/bin:$KAFKA_OPTS
 
 echo "#################################"
 echo "restart ssh service"
