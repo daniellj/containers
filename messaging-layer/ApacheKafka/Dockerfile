@@ -31,12 +31,18 @@ ADD ./binaries/jdk /opt/jdk
 
 # Variáveis de ambiente JDK
 ENV JAVA_HOME=/opt/jdk
-ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin
+ENV KAFKA_OPTS="-Djava.security.auth.login.config=/opt/apache-kafka/config/kafka_server_jaas.conf"
+ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$KAFKA_OPTS
 
 # Copia os binários do apache-kafka
 ADD ./binaries/apache-kafka /opt/apache-kafka
 
 # deleta o(s) arquivo(s) configuração do apache-kafka se existir(em)
+RUN sudo rm -rf /opt/apache-kafka/config/app_producer_01.conf
+RUN sudo rm -rf /opt/apache-kafka/config/kafka_server_jaas.conf
+RUN sudo rm -rf /opt/apache-kafka/config/consumer.properties
+RUN sudo rm -rf /opt/apache-kafka/config/kafka_client_jaas.conf
+RUN sudo rm -rf /opt/apache-kafka/config/producer.properties
 RUN sudo rm -rf /opt/apache-kafka/config/server-00.properties
 RUN sudo rm -rf /opt/apache-kafka/config/server-01.properties
 RUN sudo rm -rf /opt/apache-kafka/config/server-02.properties
@@ -46,6 +52,11 @@ RUN sudo rm -rf /etc/init.d/kafka-broker-02
 RUN sudo rm -rf /home/kafka/app
 
 # Copia os arquivos de configuração do apache-kafka
+ADD ./config-files/app_producer_01.conf /opt/apache-kafka/config/app_producer_01.conf
+ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/kafka_server_jaas.conf
+ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/consumer.properties
+ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/kafka_client_jaas.conf
+ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/producer.properties
 ADD ./config-files/server-00.properties /opt/apache-kafka/config/server-00.properties
 ADD ./config-files/server-01.properties /opt/apache-kafka/config/server-01.properties
 ADD ./config-files/server-02.properties /opt/apache-kafka/config/server-02.properties
@@ -61,7 +72,8 @@ ENV PATH=$PATH:$KAFKA_HOME:$KAFKA_HOME/bin
 # ~/.bashrc
 RUN echo "export JAVA_HOME=/opt/jdk" >> ~/.bashrc
 RUN echo "export KAFKA_HOME=/opt/apache-kafka" >> ~/.bashrc
-RUN echo "export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$KAFKA_HOME:$KAFKA_HOME/bin" >> ~/.bashrc
+RUN echo "export KAFKA_OPTS="-Djava.security.auth.login.config=/opt/apache-kafka/config/kafka_server_jaas.conf""
+RUN echo "export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$KAFKA_HOME:$KAFKA_HOME/bin:$KAFKA_OPTS" >> ~/.bashrc
 
 # Copia os arquivos de configuração da inicialização do container
 ADD ./config-files/entrypoint-startup.sh /home/kafka/entrypoint-startup.sh
@@ -77,6 +89,11 @@ RUN mkdir /data/kafka-logs-boker-02
 
 # adjust/clean format shell script file
 RUN sudo sed -i -e 's/\r$//' /home/kafka/entrypoint-startup.sh
+RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/app_producer_01.conf
+RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/kafka_server_jaas.conf
+RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/consumer.properties
+RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/kafka_client_jaas.conf
+RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/producer.properties
 RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/server-00.properties
 RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/server-01.properties
 RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/server-02.properties
@@ -99,7 +116,6 @@ RUN sudo chown -R kafka:kafka /opt/jdk
 RUN sudo chown -R kafka:kafka /opt/apache-kafka
 RUN sudo chown -R kafka:kafka /home/kafka/entrypoint-startup.sh
 RUN sudo chmod +x /home/kafka/entrypoint-startup.sh
-
 RUN sudo chown root:root /etc/init.d/kafka-broker-00
 RUN sudo chown root:root /etc/init.d/kafka-broker-01
 RUN sudo chown root:root /etc/init.d/kafka-broker-02
