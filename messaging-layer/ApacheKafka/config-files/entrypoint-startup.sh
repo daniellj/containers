@@ -44,6 +44,13 @@ nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/serve
 #service kafka-broker-02 start
 sleep 3
 
+echo "<<<<<<<<############################ STATUS KAFKA BROKER=0 ##############################>>>>>>>>>"
+service kafka-broker-00 status
+echo "<<<<<<<<############################ STATUS KAFKA BROKER=1 ##############################>>>>>>>>>"
+service kafka-broker-01 status
+echo "<<<<<<<<############################ STATUS KAFKA BROKER=2 ##############################>>>>>>>>>"
+service kafka-broker-02 status
+
 #echo "<<<<<<<<############################ START KAFKA PRODUCER ##############################>>>>>>>>>"
 #sleep 10
 #python /home/kafka/app/kafkaproducer.py

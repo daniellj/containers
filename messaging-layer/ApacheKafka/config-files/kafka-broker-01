@@ -42,7 +42,7 @@ status)
 pid=`ps ax | grep -i 'kafka.Kafka /opt/apache-kafka/config/server-01.properties' | grep -v grep | awk '{print $1}'`
 if [ -n "$pid" ]
 then
-echo "Kafka is Running as PID: $pid"
+echo "Kafka is Running on Broker=$BROKER_ID with the PID: $pid"
 else
 echo "Kafka is not Running"
 fi
