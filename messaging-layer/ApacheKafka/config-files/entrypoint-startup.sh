@@ -30,17 +30,17 @@ echo "stop Apache Kafka service...BROKER=2"
 sleep 5
 
 echo "<<<<<<<<############################ START KAFKA BROKER=0 ##############################>>>>>>>>>"
-nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-01.properties &>/dev/null &
+nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-00.properties &>/dev/null &
 #service kafka-broker-00 start
 sleep 3
 
 echo "<<<<<<<<############################ START KAFKA BROKER=1 ##############################>>>>>>>>>"
-nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-02.properties &>/dev/null &
+nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-01.properties &>/dev/null &
 #service kafka-broker-01 start
 sleep 3
 
 echo "<<<<<<<<############################ START KAFKA BROKER=2 ##############################>>>>>>>>>"
-nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-03.properties &>/dev/null &
+nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-02.properties &>/dev/null &
 #service kafka-broker-02 start
 sleep 3
 
