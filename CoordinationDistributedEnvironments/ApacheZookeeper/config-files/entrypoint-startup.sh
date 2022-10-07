@@ -15,15 +15,20 @@ echo "restart ssh service"
 sudo service ssh restart
 
 echo "#################################"
-echo "stop Apache Zookeeper service..."
+#echo "stop Apache Zookeeper service..."
 #/opt/apache-zookeeper/bin/zkServer.sh stop /opt/apache-zookeeper/conf/zoo.cfg
-service zookeeper stop
-sleep 5
+#service zookeeper stop
+#sleep 5
 
-echo "#################################"
-echo "start Apache Zookeeper service..."
+#echo "#################################"
+#echo "start Apache Zookeeper service..."
 #/opt/apache-zookeeper/bin/zkServer.sh start /opt/apache-zookeeper/conf/zoo.cfg
-service zookeeper start
+#service zookeeper start
+#sleep 5
+
+#echo "#################################"
+echo "start Apache Zookeeper service..."
+/opt/apache-zookeeper/bin/zkServer.sh restart /opt/apache-zookeeper/conf/zoo.cfg
 sleep 5
 
 echo "#################################"
