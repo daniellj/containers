@@ -17,34 +17,34 @@ sleep 5
 
 echo "############################ STOP KAFKA BROKERS ##############################"
 echo "stop Apache Kafka service...BROKER=0"
-#/opt/apache-kafka/bin/kafka-server-stop.sh /opt/apache-kafka/config/server-00.properties
-service kafka-broker-00 stop
+/opt/apache-kafka/bin/kafka-server-stop.sh /opt/apache-kafka/config/server-00.properties
+#service kafka-broker-00 stop
 
 echo "stop Apache Kafka service...BROKER=1"
-#/opt/apache-kafka/bin/kafka-server-stop.sh /opt/apache-kafka/config/server-01.properties
-service kafka-broker-01 stop
+/opt/apache-kafka/bin/kafka-server-stop.sh /opt/apache-kafka/config/server-01.properties
+#service kafka-broker-01 stop
 
 echo "stop Apache Kafka service...BROKER=2"
-#/opt/apache-kafka/bin/kafka-server-stop.sh /opt/apache-kafka/config/server-02.properties
-service kafka-broker-02 stop
+/opt/apache-kafka/bin/kafka-server-stop.sh /opt/apache-kafka/config/server-02.properties
+#service kafka-broker-02 stop
 sleep 5
 
 echo "<<<<<<<<############################ START KAFKA BROKER=0 ##############################>>>>>>>>>"
-#nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-01.properties &>/dev/null &
-service kafka-broker-00 start
-sleep 5
+nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-01.properties &>/dev/null &
+#service kafka-broker-00 start
+sleep 3
 
 echo "<<<<<<<<############################ START KAFKA BROKER=1 ##############################>>>>>>>>>"
-#nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-02.properties &>/dev/null &
-service kafka-broker-01 start
-sleep 5
+nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-02.properties &>/dev/null &
+#service kafka-broker-01 start
+sleep 3
 
 echo "<<<<<<<<############################ START KAFKA BROKER=2 ##############################>>>>>>>>>"
-#nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-03.properties &>/dev/null &
-service kafka-broker-02 start
-sleep 5
+nohup /opt/apache-kafka/bin/kafka-server-start.sh /opt/apache-kafka/config/server-03.properties &>/dev/null &
+#service kafka-broker-02 start
+sleep 3
 
-echo "<<<<<<<<############################ START KAFKA PRODUCER ##############################>>>>>>>>>"
+#echo "<<<<<<<<############################ START KAFKA PRODUCER ##############################>>>>>>>>>"
 #sleep 10
 #python /home/kafka/app/kafkaproducer.py
 
