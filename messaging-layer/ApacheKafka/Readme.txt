@@ -1,5 +1,3 @@
-1- Baixe e descompacte o arquivo zip disponível ao final do capítulo.
-
 2- Faça o download do Apache Hadoop e do JDK 8, coloque na pasta "binarios", descompacte os arquivos e renomeie as pastas. O procedimento é mostrado nas aulas.
 
 3- Abra o terminal ou prompt de comando, navegue até a pasta do NameNode e execute a instrução abaixo para criar a imagem:
@@ -42,14 +40,16 @@ docker container exec -it apache_kafka /bin/bash
 # Produzindo mensagens para o tópico no Apache Kafka
 /opt/apache-kafka/bin/kafka-console-producer.sh --broker-list kafka:9092,kafka:9093,kafka:9094 --topic topic01
 
+# Produzindo mensagens para o tópico no Apache Kafka COM AUTENTICAÇÃO SASL
+/opt/apache-kafka/bin/kafka-console-producer.sh --broker-list kafka:9092,kafka:9093,kafka:9094 --topic topic01 --producer.config /opt/apache-kafka/config/producer.properties
+
 # após abrir o console, digite o conteúdo das mensagens e ao final de cada mensagem, clicar enter.
 
 # Consumindo mensagens do tópico no Apache Kafka
 /opt/apache-kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092,kafka:9093,kafka:9094 --topic topic01 --from-beginning
 
+# Consumindo mensagens do tópico no Apache Kafka COM AUTENTICAÇÃO SASL
+/opt/apache-kafka/bin/kafka-console-consumer.sh --bootstrap-server kafka:9092,kafka:9093,kafka:9094 --topic topic01 --consumer.config /opt/apache-kafka/config/consumer.properties --from-beginning
+
 # verificando os logs do Apache Kafka
 tail -f -n3000 /opt/apache-kafka/logs/server.log
-
-
-
-
