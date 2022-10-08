@@ -38,6 +38,7 @@ ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$KAFKA_OPTS
 ADD ./binaries/apache-kafka /opt/apache-kafka
 
 # deleta o(s) arquivo(s) configuração do apache-kafka se existir(em)
+RUN sudo rm -rf /opt/apache-kafka/config/config.properties
 RUN sudo rm -rf /opt/apache-kafka/config/app_producer_01.conf
 RUN sudo rm -rf /opt/apache-kafka/config/kafka_server_jaas.conf
 RUN sudo rm -rf /opt/apache-kafka/config/consumer.properties
@@ -52,11 +53,12 @@ RUN sudo rm -rf /etc/init.d/kafka-broker-02
 RUN sudo rm -rf /home/kafka/app
 
 # Copia os arquivos de configuração do apache-kafka
+ADD ./config-files/config.properties /opt/apache-kafka/config/config.properties
 ADD ./config-files/app_producer_01.conf /opt/apache-kafka/config/app_producer_01.conf
 ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/kafka_server_jaas.conf
-ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/consumer.properties
-ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/kafka_client_jaas.conf
-ADD ./config-files/kafka_server_jaas.conf /opt/apache-kafka/config/producer.properties
+ADD ./config-files//consumer.properties /opt/apache-kafka/config/consumer.properties
+ADD ./config-files/kafka_client_jaas.conf /opt/apache-kafka/config/kafka_client_jaas.conf
+ADD ./config-files/producer.properties /opt/apache-kafka/config/producer.properties
 ADD ./config-files/server-00.properties /opt/apache-kafka/config/server-00.properties
 ADD ./config-files/server-01.properties /opt/apache-kafka/config/server-01.properties
 ADD ./config-files/server-02.properties /opt/apache-kafka/config/server-02.properties
@@ -88,6 +90,7 @@ RUN mkdir /data/kafka-logs-boker-01
 RUN mkdir /data/kafka-logs-boker-02
 
 # adjust/clean format shell script file
+RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/config.properties
 RUN sudo sed -i -e 's/\r$//' /home/kafka/entrypoint-startup.sh
 RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/app_producer_01.conf
 RUN sudo sed -i -e 's/\r$//' /opt/apache-kafka/config/kafka_server_jaas.conf
