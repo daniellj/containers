@@ -12,7 +12,9 @@ echo "restart ssh service"
 sudo service ssh restart
 
 echo "############################## create or update admin user in Kafka ##############################"
-nohup /opt/apache-kafka/bin/kafka-configs.sh --zookeeper zookeeper_worker_01:2181,zookeeper_worker_02:2181,zookeeper_worker_03:2181 --alter --add-config 'SCRAM-SHA-512=[password=admin-secret]' --entity-type users --entity-name admin &>/dev/null &
+#nohup /opt/apache-kafka/bin/kafka-configs.sh --bootstrap-server kafka:9092,kafka:9093,kafka:9094 --alter --add-config 'SCRAM-SHA-512=[password=admin-secret]' --entity-type users --entity-name admin &>/dev/null &
+#nohup /opt/apache-kafka/bin/kafka-configs.sh --zookeeper zookeeper_worker_01:2181,zookeeper_worker_02:2181,zookeeper_worker_03:2181 --alter --add-config 'SCRAM-SHA-512=[password=admin-secret]' --entity-type users --entity-name admin &>/dev/null &
+/opt/apache-kafka/bin/kafka-configs.sh --zookeeper zookeeper_worker_01:2181,zookeeper_worker_02:2181,zookeeper_worker_03:2181 --alter --add-config 'SCRAM-SHA-512=[password=admin-secret]' --entity-type users --entity-name admin
 sleep 5
 
 echo "############################ STOP KAFKA BROKERS ##############################"
