@@ -28,6 +28,11 @@ messaging-layer/ApacheKafka/binaries/jdk/*
 !messaging-layer/ApacheKafka/binaries/apache-kafka/index.md
 !messaging-layer/ApacheKafka/binaries/jdk/index.md
 
+processing-layer/ApacheSpark/binaries/jdk/*
+processing-layer/ApacheSpark/binaries/apache-spark/*
+!processing-layer/ApacheSpark/binaries/jdk/index.md
+!processing-layer/ApacheSpark/binaries/apache-spark/index.md
+
 streaming-layer/ApacheFlume/binaries/apache-flume/*
 streaming-layer/ApacheFlume/binaries/jdk/*
 streaming-layer/ApacheFlume/binaries/hadoop-lib/*

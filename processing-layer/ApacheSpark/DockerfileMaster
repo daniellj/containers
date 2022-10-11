@@ -1,0 +1,92 @@
+FROM ubuntu:latest
+
+# Updates e instalações
+RUN \
+  apt-get update && apt-get install -y \
+  openssh-server \
+  openssh-client \
+  python3 \
+  pip \
+  sshpass \
+  sudo \
+  arp-scan \
+  net-tools \
+  iputils-ping \
+  vim \
+  && apt-get clean
+
+# Cria usuário para a instalação do Hadoop
+RUN useradd -m spark && echo "spark:supergroup" | chpasswd && adduser spark sudo && echo "spark ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers && cd /usr/bin/ && sudo ln -s python3 python
+
+# Copia o arquivo de configuração do ssh
+ADD ./config-files/ssh_config /etc/ssh/ssh_config
+
+# Muda o usuário
+USER spark
+
+# Create .ssh path
+RUN mkdir /home/spark/.ssh
+
+# Create SSH key on master node
+RUN ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa && cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys && chmod 0600 ~/.ssh/authorized_keys
+
+# Copia os binários do JDK
+ADD ./binaries/jdk /opt/jdk
+
+# Variáveis de ambiente JDK
+ENV JAVA_HOME=/opt/jdk
+ENV PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin
+
+# Copia os binários do apache-spark
+ADD ./binaries/apache-spark /opt/apache-spark
+
+# deleta o(s) arquivo(s) configuração do apache-spark se existir(em)
+RUN sudo rm -rf /opt/apache-spark/config/spark-env.sh
+RUN sudo rm -rf /opt/apache-spark/config/workers
+
+# Copia os arquivos de configuração do apache-spark
+ADD ./config-files/spark-env.sh /opt/apache-spark/config/spark-env.sh
+ADD ./config-files/workers /opt/apache-spark/config/workers
+
+# Variáveis de ambiente do apache-spark
+ENV SPARK_HOME=/opt/apache-spark
+ENV PATH=$PATH:$SPARK_HOME:$SPARK_HOME/bin:$SPARK_HOME/sbin
+
+# ~/.bashrc
+RUN echo "export JAVA_HOME=/opt/jdk" >> ~/.bashrc
+RUN echo "export SPARK_HOME=/opt/apache-spark" >> ~/.bashrc
+RUN echo "export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$SPARK_HOME:$SPARK_HOME/bin:$SPARK_HOME/sbin" >> ~/.bashrc
+
+# Copia os arquivos de configuração da inicialização do container
+ADD ./config-files/entrypoint-startup.sh /home/spark/entrypoint-startup.sh
+
+# Muda o usuário
+USER root
+
+# adjust/clean format shell script file
+RUN sudo sed -i -e 's/\r$//' /home/spark/entrypoint-startup.sh
+RUN sudo sed -i -e 's/\r$//' /opt/apache-spark/config/spark-env.sh
+RUN sudo sed -i -e 's/\r$//' /opt/apache-spark/config/workers
+RUN sudo sed -i -e 's/\r$//' /etc/ssh/ssh_config
+
+# Ajuste dos privilégios
+RUN sudo chown -R spark:spark /home/spark
+RUN sudo chmod 0700 -R /home/spark/.ssh/authorized_keys
+RUN sudo chmod +x /home/spark/entrypoint-startup.sh
+RUN sudo chown -R spark:spark /opt/jdk
+RUN sudo chown -R spark:spark /opt/apache-spark
+
+# Muda o usuário
+USER spark
+
+# Add the cron job (need cron app installed)
+#RUN crontab -l | { cat; echo "@reboot nohup /opt/apache-spark/bin/spark-server-start.sh /opt/apache-spark/config/server-00.properties &>/dev/null &"; } | crontab -
+#RUN crontab -l | { cat; echo "@reboot nohup /opt/apache-spark/bin/spark-server-start.sh /opt/apache-spark/config/server-01.properties &>/dev/null &"; } | crontab -
+#RUN crontab -l | { cat; echo "@reboot nohup /opt/apache-spark/bin/spark-server-start.sh /opt/apache-spark/config/server-02.properties &>/dev/null &"; } | crontab -
+
+# Pasta de trabalho
+WORKDIR /home/spark
+
+#ENTRYPOINT ["/home/spark/entrypoint-startup.sh"]
+
+EXPOSE 8080
