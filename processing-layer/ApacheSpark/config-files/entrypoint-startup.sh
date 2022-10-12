@@ -24,8 +24,9 @@ if [ "$HOSTNAME" = spark-master ]; then
 	NODE2=spark-node2
 	#sshpass -p "" scp -o StrictHostKeyChecking=no /home/spark/.ssh/authorized_keys spark@$NODE1:/home/spark/.ssh
 	#sshpass -p "" scp -o StrictHostKeyChecking=no /home/spark/.ssh/authorized_keys spark@$NODE2:/home/spark/.ssh
-    KEY=$(cat ~/.ssh/id_rsa.pub) || sshpass -p "" ssh -p 22 spark@$NODE1 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
-	KEY=$(cat ~/.ssh/id_rsa.pub) || sshpass -p "" ssh -p 22 spark@$NODE2 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
+    KEY=$(cat ~/.ssh/id_rsa.pub)
+	sshpass -f /home/spark/.credential_connect ssh -p 22 spark@$NODE1 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
+	sshpass -f /home/spark/.credential_connect ssh -p 22 spark@$NODE2 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
 
 	echo '### Start in background Apache Spark on master node ###'
 	nohup /opt/apache-spark/sbin/start-all.sh &>/dev/null &
@@ -35,3 +36,6 @@ else
     echo 'This is not a spark-master. Hostname = $HOSTNAME'
 	jps
 fi
+
+#Extra line added in the script to run all command line arguments
+exec "$@";
