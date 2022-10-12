@@ -94,4 +94,4 @@ WORKDIR /home/spark
 
 ENTRYPOINT ["/home/spark/entrypoint-startup.sh"]
 
-EXPOSE 4040
+EXPOSE 4040 8080 7077
