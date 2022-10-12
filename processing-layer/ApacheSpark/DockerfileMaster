@@ -12,6 +12,7 @@ RUN \
   arp-scan \
   net-tools \
   iputils-ping \
+  unzip \
   vim \
   && apt-get clean
 
