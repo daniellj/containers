@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo "export environment variables"
-sudo export PATH=$PATH
+export JAVA_HOME=/opt/jdk
+export PATH=$PATH:$JAVA_HOME:/opt/jdk:/opt/jdk/bin
 
 echo "#################################"
 echo 'start the jupyterhub'

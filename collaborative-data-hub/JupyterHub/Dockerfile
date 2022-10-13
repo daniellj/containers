@@ -12,6 +12,7 @@ RUN \
   arp-scan \
   net-tools \
   iputils-ping \
+  unzip \
   vim \
   && apt-get clean
 
@@ -24,6 +25,30 @@ RUN echo "admin:admin" | chpasswd
 RUN mkdir /home/admin/notebooks
 RUN sudo chown -R admin:admin /home/admin
 RUN sudo chmod 770 -R /home/admin/notebooks
+
+######## JDK instalation ########
+# Copia os binários do JDK
+ADD ./binaries/jdk /opt/jdk
+RUN chown -R jupyterhub:root /opt/jdk
+RUN chmod -R 775 /opt/jdk
+#################################
+
+# Muda o usuário
+USER admin
+
+# ~/.bashrc admin user
+RUN export JAVA_HOME=/opt/jdk
+RUN export PATH=$PATH:$JAVA_HOME:/opt/jdk/:/opt/jdk/bin
+RUN echo "export JAVA_HOME=/opt/jdk" >> ~/.bashrc
+RUN echo "export PATH=$PATH:/opt/jdk:/opt/jdk/bin" >> ~/.bashrc
+
+
+# Muda o usuário
+USER root
+
+# ~/.bashrc root user
+RUN export JAVA_HOME=/opt/jdk
+RUN export PATH=$PATH:$JAVA_HOME:/opt/jdk/:/opt/jdk/bin
 
 # Paths
 RUN cd /
@@ -59,6 +84,7 @@ RUN sudo chown -R root:jupyterhub /srv
 
 # Variáveis de ambiente
 ENV PATH=$PATH
+ENV PATH=$PATH:$JAVA_HOME:/opt/jdk/bin:/opt/jdk/sbin
 
 # install other python libraries
 RUN /srv/jupyterhub/bin/python -m pip install pyspark pandas numpy matplotlib scikit-learn statsmodels seaborn bokeh scrapy
@@ -66,8 +92,11 @@ RUN /srv/jupyterhub/bin/python -m pip install pyspark pandas numpy matplotlib sc
 # Muda o usuário
 USER jupyterhub
 
-# ~/.bashrc
-RUN echo "export PATH=$PATH" >> ~/.bashrc
+# ~/.bashrc jupyterhub user
+RUN export JAVA_HOME=/opt/jdk
+RUN export PATH=$PATH:$JAVA_HOME:/opt/jdk/:/opt/jdk/bin
+RUN echo "export JAVA_HOME=/opt/jdk" >> ~/.bashrc
+RUN echo "export PATH=$PATH:/opt/jdk:/opt/jdk/bin" >> ~/.bashrc
 
 # Pasta de trabalho
 WORKDIR /home/jupyterhub
