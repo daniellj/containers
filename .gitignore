@@ -18,6 +18,9 @@ ETL/ApacheNifi/binaries/jdk/*
 !ETL/ApacheNifi/binaries/apache-nifi/index.md
 !ETL/ApacheNifi/binaries/jdk/index.md
 
+collaborative-data-hub/JupyterHub/binaries/*
+!collaborative-data-hub/JupyterHub/binaries/index.md
+
 ETL/StreamSet/binaries/jdk/*
 ETL/StreamSet/binaries/StreamSetsDataCollector/*
 !ETL/StreamSet/binaries/jdk/index.md
