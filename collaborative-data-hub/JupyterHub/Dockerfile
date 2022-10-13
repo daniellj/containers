@@ -60,6 +60,9 @@ RUN sudo chown -R root:jupyterhub /srv
 # Variáveis de ambiente
 ENV PATH=$PATH
 
+# install other python libraries
+RUN /srv/jupyterhub/bin/python -m pip install pyspark pandas numpy matplotlib scikit-learn statsmodels seaborn bokeh scrapy
+
 # Muda o usuário
 USER jupyterhub
 
