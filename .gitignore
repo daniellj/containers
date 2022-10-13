@@ -21,6 +21,12 @@ ETL/ApacheNifi/binaries/jdk/*
 collaborative-data-hub/JupyterHub/binaries/*
 !collaborative-data-hub/JupyterHub/binaries/index.md
 
+file-transfer-protocol/FTP/binaries/*
+!file-transfer-protocol/FTP/binaries/index.md
+
+file-transfer-protocol/SFTP/binaries/*
+!file-transfer-protocol/SFTP/binaries/index.md
+
 ETL/StreamSet/binaries/jdk/*
 ETL/StreamSet/binaries/StreamSetsDataCollector/*
 !ETL/StreamSet/binaries/jdk/index.md
