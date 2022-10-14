@@ -87,7 +87,7 @@ ENV PATH=$PATH
 ENV PATH=$PATH:$JAVA_HOME:/opt/jdk/bin:/opt/jdk/sbin
 
 # install other python libraries
-RUN /srv/jupyterhub/bin/python -m pip install pyspark pandas numpy matplotlib scikit-learn statsmodels seaborn bokeh scrapy
+RUN /srv/jupyterhub/bin/python -m pip install pyspark pandas numpy matplotlib scikit-learn statsmodels seaborn bokeh scrapy pysftp delta
 
 # Muda o usuário
 USER jupyterhub
