@@ -20,6 +20,8 @@ RUN useradd -m hduser && echo "hduser:supergroup" | chpasswd && adduser hduser s
 # Copia o arquivo de configuração do ssh
 ADD ./config-files/ssh_config /etc/ssh/ssh_config
 
+RUN echo "hduser:hduser" | chpasswd
+
 # Muda o usuário
 USER hduser
 
