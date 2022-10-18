@@ -74,6 +74,8 @@ ADD ./config-files/entrypoint-startup.sh /home/spark/entrypoint-startup.sh
 # Muda o usuário
 USER root
 
+RUN pip install delta-spark==2.1.0 pyspark==3.3.0
+
 # adjust/clean format shell script file
 RUN sudo sed -i -e 's/\r$//' /home/spark/entrypoint-startup.sh
 RUN sudo sed -i -e 's/\r$//' /opt/apache-spark/conf/spark-env.sh
