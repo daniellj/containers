@@ -2,9 +2,10 @@
 
 echo "#################################"
 echo "export environment variables"
-export PATH=$PATH
+export HADOOP_HOME=/home/hduser/hadoop
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
+export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_COMMON_LIB_NATIVE_DIR:$LD_LIBRARY_PATH
 
 echo "#################################"
 echo "restart ssh service"
