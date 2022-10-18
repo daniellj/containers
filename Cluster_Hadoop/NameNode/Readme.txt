@@ -18,7 +18,7 @@ docker network create -d bridge dfs_net
 
 4- Crie e inicialize o container com a instrução abaixo:
 
-docker run -it -d --net dfs_net --ip 172.19.0.10 --hostname hdpmaster --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 -p 9870:9870 -p 50030:50030 -p 8020:8020 -p 22:22 --name namenode namenode:hadoop_cluster /bin/bash
+docker run -it -d --net dfs_net --ip 172.19.0.10 --hostname hdpmaster --add-host=zookeeper_worker_01:172.19.0.2 --add-host=zookeeper_worker_02:172.19.0.3 --add-host=zookeeper_worker_03:172.19.0.4 --add-host=kafka:172.19.0.5 --add-host=postgresql-db:172.19.0.6 --add-host=pgadmin:172.19.0.7 --add-host=flume_stream:172.19.0.8 --add-host=nifi:172.19.0.9 --add-host=datanode1:172.19.0.11 --add-host=datanode2:172.19.0.12 -p 9870:9870 -p 50030:50030 -p 8020:8020 --name namenode namenode:hadoop_cluster /bin/bash
 
 # Documentação do doccker run:
 https://docs.docker.com/engine/reference/commandline/run/
