@@ -50,6 +50,12 @@ ENV HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 ENV LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
 ENV PATH=$PATH:$HADOOP_HOME:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_COMMON_LIB_NATIVE_DIR
 
+# Variáveis de ambiente
+RUN echo "export HADOOP_HOME=/home/hduser/hadoop" >> ~/.bashrc
+RUN echo "export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native" >> ~/.bashrc
+RUN echo "export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native" >> ~/.bashrc
+RUN echo "export PATH=$PATH:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_COMMON_LIB_NATIVE_DIR:$LD_LIBRARY_PATH" >> ~/.bashrc
+
 # Pastas para os arquivos do DataNode
 RUN mkdir /home/hduser/hdfs
 RUN mkdir /home/hduser/hdfs/datanode
@@ -74,6 +80,11 @@ RUN sudo chmod +x /home/hduser/entrypoint-startup.sh
 
 # adjust/clean format shell script file
 RUN sudo sed -i -e 's/\r$//' /home/hduser/entrypoint-startup.sh
+RUN sudo sed -i -e 's/\r$//' /home/hduser/hadoop/etc/hadoop/hadoop-env.sh
+RUN sudo sed -i -e 's/\r$//' /home/hduser/hadoop/etc/hadoop/core-site.xml
+RUN sudo sed -i -e 's/\r$//' /home/hduser/hadoop/etc/hadoop/hdfs-site.xml
+RUN sudo sed -i -e 's/\r$//' /etc/ssh/ssh_config
+RUN sudo sed -i -e 's/\r$//' /home/hduser/hadoop/etc/hadoop/workers
 
 # Muda o usuário
 USER hduser
@@ -96,4 +107,4 @@ USER hduser
 ENTRYPOINT ["/home/hduser/entrypoint-startup.sh"]
 
 # Portas que poderão ser usadas
-EXPOSE 9864 22
+EXPOSE 9864
