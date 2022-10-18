@@ -19,17 +19,30 @@ hdfs --daemon stop namenode
 #hdfs namenode -format
 
 echo "#################################"
-echo "start hdfs on NameNode"
-hdfs --daemon start namenode
-
-echo "#################################"
-echo "check status hadoop cluster"
-jps
-
-echo "#################################"
-#echo "copy authorized keys for ssh servers"
+echo "copy authorized keys for ssh servers"
 #ssh-copy-id -p 22 -f -i /home/hduser/.ssh/id_rsa.pub hduser@datanode1
 #ssh-copy-id -p 22 -f -i /home/hduser/.ssh/id_rsa.pub hduser@datanode2
+
+if [ "$HOSTNAME" = hdpmaster ]; then
+	echo '### Send the authorized_keys to another nodes ###'
+	NODE1=datanode1
+	NODE2=datanode2
+    KEY=$(cat ~/.ssh/id_rsa.pub)
+	sshpass -f /home/hduser/.credential_connect ssh -p 22 hduser@$NODE1 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
+	sshpass -f /home/hduser/.credential_connect ssh -p 22 hduser@$NODE2 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
+
+	echo "#################################"
+	echo "start hdfs on NameNode"
+	hdfs --daemon start namenode
+
+	echo "#################################"
+	echo "check status hadoop cluster"
+	sleep 10
+	jps
+else
+    echo 'This is not a hduser-master. Hostname = $HOSTNAME'
+	jps
+fi
 
 echo "#################################"
 #Extra line added in the script to run all command line arguments
