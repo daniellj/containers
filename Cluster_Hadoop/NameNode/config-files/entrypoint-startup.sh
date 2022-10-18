@@ -28,8 +28,8 @@ if [ "$HOSTNAME" = hdpmaster ]; then
 	NODE1=datanode1
 	NODE2=datanode2
     KEY=$(cat ~/.ssh/id_rsa.pub)
-	sshpass -f /home/hduser/.credential_connect ssh -p 22 hduser@$NODE1 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
-	sshpass -f /home/hduser/.credential_connect ssh -p 22 hduser@$NODE2 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
+	sshpass -p hduser ssh -p 22 hduser@$NODE1 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
+	sshpass -p hduser ssh -p 22 hduser@$NODE2 "if [ -z \"\$(grep \"$KEY\" ~/.ssh/authorized_keys )\" ]; then echo $KEY >> ~/.ssh/authorized_keys; echo key added.; fi;"
 
 	echo "#################################"
 	echo "start hdfs on NameNode"
