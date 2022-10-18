@@ -82,12 +82,6 @@ builder = s_session.builder
 #s_session_delta = configure_spark_with_delta_pip(spark_session_builder=builder).getOrCreate()
 
 
-# In[ ]:
-
-
-
-
-
 # In[3]:
 
 
@@ -134,7 +128,7 @@ def reduce_mem_usage(df):
 
 # ### Read .CSV from SFTP and load into a Pandas DataFrame
 
-# In[5]:
+# In[4]:
 
 
 environ["FTP_HOST"] = 'sftp-01' # sftp-01 = 172.19.0.15
@@ -164,8 +158,8 @@ schema_doc = {
                 }
 
 chunksize=500000
-#sftp_file="tags.csv"
-sftp_file="ratings.csv"
+sftp_file="tags.csv"
+#sftp_file="ratings.csv"
 
 with pysftp.Connection(environ["FTP_HOST"], port = int(environ["FTP_PORT"]), username = environ["FTP_USER"], password = environ["FTP_PASS"], cnopts=cnopts) as connection:
     print("Connection succesfully established…\n")
@@ -180,7 +174,6 @@ with pysftp.Connection(environ["FTP_HOST"], port = int(environ["FTP_PORT"]), use
                 data = s_session.createDataFrame(data=reader, schema=schema_doc.get(sftp_file, sftp_file.split('.')[0]))
             else:
                 new_data = s_session.createDataFrame(data=reader, schema=schema_doc.get(sftp_file, sftp_file.split('.')[0]))
-                #data.append(other=new_data)
                 data = data.union(new_data)
                 del new_data
             i = i + 1
@@ -189,34 +182,39 @@ with pysftp.Connection(environ["FTP_HOST"], port = int(environ["FTP_PORT"]), use
 connection.close()
 
 
-# In[11]:
+# In[14]:
 
 
 #data.show(10)
 
-data
+print( "- sparkSession: ", data.sparkSession, '\n' )
+print("- Object: ", type(data), "\n")
+print( "- schema: ", data.schema, '\n' )
+print( "- printSchema: ", data.printSchema(), '\n' )
+print( "- isStreaming: ", data.isStreaming, '\n' )
+print( "- columns: ", data.columns, '\n' )
+print( "- dtypes: ", data.dtypes, '\n' )
+print( "- head: ", data.head(10), '\n' )
+print( "- show: ", data.show(10), '\n' )
+print( "- isEmpty: ", data.isEmpty(), '\n' )
+print("- cache", data.cache(), '\n' ) # Persists the DataFrame with the default storage level (MEMORY_AND_DISK)
+print( "- persist: ", data.persist(), '\n' ) # Sets the storage level to persist the contents of the DataFrame across operations after the first time it is computed.
+print( "- storageLevel: ", data.storageLevel, '\n' )
+print( "- count: ", data.count(), '\n' )
+if sftp_file=="ratings.csv":
+    print( "- correlation between rating and timestamp: ", data.corr("rating", "timestamp"), '\n' )
+    print( "- covariance between rating and timestamp: ", data.cov("rating", "timestamp"), '\n' ) # Calculate the sample covariance for the given columns, specified by their names, as a double value
+    print( "- descriptive statistics: ", data.describe(["userId", "movieId", "rating", "timestamp"]).show(), '\n' )
+#print( "- summary: ", data.summary(), '\n' ) # Computes specified statistics for numeric and string columns
+
+
+# In[11]:
+
+
+
 
 
 # ### Convert Pandas to PySpark (Spark) DataFrame
-
-# In[ ]:
-
-
-#Create PySpark DataFrame from Pandas
-
-from pyspark.sql.types import StructType, StructField, LongType, StringType
-
-schema = StructType(
-                    [
-                        StructField("movieId", LongType(), True, metadata = {'description': 'The movie unique identifier.'}),
-                        StructField("title", StringType(), True, metadata = {'description': 'The movie title.'}),
-                        StructField("genres", StringType(), True, metadata = {'description': 'The movie genre.'})
-                    ]
-                    )
-
-sparkDF=spark.createDataFrame(data = data)
-sparkDF.printSchema()
-
 
 # In[ ]:
 

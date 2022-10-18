@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>teste</title><script type="text/javascript" src="http://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=ik_GOtIJTsGn87lcLQCKR_jUdrFKfSHJM6JPApythzRvOmV9TA4lwDuk6TY-haG2MEdKKmOO2StaWSYKSF0XDoNQW3ieUXHWWTN4uHLD8mQMIQjbony22L3I-bekDf58" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>teste</title><script type="text/javascript" src="http://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=QJ_oX77-O_De6t_qiTpbTQK9_kGZFXSp7nj_vuTU0-PAjiTAjrHrW-6KRMt4cd0su1mo4D5fK_U3Ec0Su9npqzgafaT1J4JTuOl7_xF_Xec9ar_H0zgsJg_kCaQUZXGF" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14757,29 +14757,13 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>22/10/17 23:55:59 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/10/18 01:14:18 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 </pre>
 </div>
 </div>
 
 </div>
 
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14852,7 +14836,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FTP_HOST&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sftp-01&#39;</span> <span class="c1"># sftp-01 = 172.19.0.15</span>
@@ -14882,8 +14866,8 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
                 <span class="p">}</span>
 
 <span class="n">chunksize</span><span class="o">=</span><span class="mi">500000</span>
-<span class="c1">#sftp_file=&quot;tags.csv&quot;</span>
-<span class="n">sftp_file</span><span class="o">=</span><span class="s2">&quot;ratings.csv&quot;</span>
+<span class="n">sftp_file</span><span class="o">=</span><span class="s2">&quot;tags.csv&quot;</span>
+<span class="c1">#sftp_file=&quot;ratings.csv&quot;</span>
 
 <span class="k">with</span> <span class="n">pysftp</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FTP_HOST&quot;</span><span class="p">],</span> <span class="n">port</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FTP_PORT&quot;</span><span class="p">]),</span> <span class="n">username</span> <span class="o">=</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FTP_USER&quot;</span><span class="p">],</span> <span class="n">password</span> <span class="o">=</span> <span class="n">environ</span><span class="p">[</span><span class="s2">&quot;FTP_PASS&quot;</span><span class="p">],</span> <span class="n">cnopts</span><span class="o">=</span><span class="n">cnopts</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Connection succesfully established…</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -14898,7 +14882,6 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
                 <span class="n">data</span> <span class="o">=</span> <span class="n">s_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">reader</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema_doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sftp_file</span><span class="p">,</span> <span class="n">sftp_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">new_data</span> <span class="o">=</span> <span class="n">s_session</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">reader</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema_doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sftp_file</span><span class="p">,</span> <span class="n">sftp_file</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]))</span>
-                <span class="c1">#data.append(other=new_data)</span>
                 <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="n">new_data</span><span class="p">)</span>
                 <span class="k">del</span> <span class="n">new_data</span>
             <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
@@ -14928,258 +14911,140 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 Chunksize block = line 0 until 500000
 Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+Memory usage after optimization is: 8.99 MB
+Decreased by 41.1%
 
 Chunksize block = line 500001 until 1000000
 Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+Memory usage after optimization is: 8.97 MB
+Decreased by 41.2%
 
 Chunksize block = line 1000001 until 1500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+Memory usage of dataframe is 2.85 MB
+Memory usage after optimization is: 1.88 MB
+Decreased by 33.9%
 
-Chunksize block = line 1500001 until 2000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+</pre>
+</div>
+</div>
 
-Chunksize block = line 2000001 until 2500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+</div>
 
-Chunksize block = line 2500001 until 3000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+</div>
 
-Chunksize block = line 3000001 until 3500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#data.show(10)</span>
 
-Chunksize block = line 3500001 until 4000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- sparkSession: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">sparkSession</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Object: &quot;</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">),</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- schema: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">schema</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- printSchema: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">printSchema</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- isStreaming: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">isStreaming</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- columns: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- dtypes: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">dtypes</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- head: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- show: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- isEmpty: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- cache&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">cache</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Persists the DataFrame with the default storage level (MEMORY_AND_DISK)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- persist: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">persist</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Sets the storage level to persist the contents of the DataFrame across operations after the first time it is computed.</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- storageLevel: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">storageLevel</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- count: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="k">if</span> <span class="n">sftp_file</span><span class="o">==</span><span class="s2">&quot;ratings.csv&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- correlation between rating and timestamp: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- covariance between rating and timestamp: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Calculate the sample covariance for the given columns, specified by their names, as a double value</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- descriptive statistics: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+<span class="c1">#print( &quot;- summary: &quot;, data.summary(), &#39;\n&#39; ) # Computes specified statistics for numeric and string columns</span>
+</pre></div>
 
-Chunksize block = line 4000001 until 4500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+     </div>
+</div>
+</div>
+</div>
 
-Chunksize block = line 4500001 until 5000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 5.72 MB
-Decreased by 62.5%
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
 
-Chunksize block = line 5000001 until 5500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
 
-Chunksize block = line 5500001 until 6000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
-Chunksize block = line 6000001 until 6500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
 
-Chunksize block = line 6500001 until 7000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>- sparkSession:  &lt;pyspark.sql.session.SparkSession object at 0x7fd0a0cfead0&gt; 
 
-Chunksize block = line 7000001 until 7500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- Object:  &lt;class &#39;pyspark.sql.dataframe.DataFrame&#39;&gt; 
 
-Chunksize block = line 7500001 until 8000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- schema:  StructType([StructField(&#39;userId&#39;, IntegerType(), True), StructField(&#39;movieId&#39;, IntegerType(), True), StructField(&#39;tag&#39;, StringType(), True), StructField(&#39;timestamp&#39;, IntegerType(), True)]) 
 
-Chunksize block = line 8000001 until 8500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+root
+ |-- userId: integer (nullable = true)
+ |-- movieId: integer (nullable = true)
+ |-- tag: string (nullable = true)
+ |-- timestamp: integer (nullable = true)
 
-Chunksize block = line 8500001 until 9000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- printSchema:  None 
 
-Chunksize block = line 9000001 until 9500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- isStreaming:  False 
 
-Chunksize block = line 9500001 until 10000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- columns:  [&#39;userId&#39;, &#39;movieId&#39;, &#39;tag&#39;, &#39;timestamp&#39;] 
 
-Chunksize block = line 10000001 until 10500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- dtypes:  [(&#39;userId&#39;, &#39;int&#39;), (&#39;movieId&#39;, &#39;int&#39;), (&#39;tag&#39;, &#39;string&#39;), (&#39;timestamp&#39;, &#39;int&#39;)] 
 
-Chunksize block = line 10500001 until 11000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- head:  [Row(userId=3, movieId=260, tag=&#39;classic&#39;, timestamp=1439472355), Row(userId=3, movieId=260, tag=&#39;sci-fi&#39;, timestamp=1439472256), Row(userId=4, movieId=1732, tag=&#39;dark comedy&#39;, timestamp=1573943598), Row(userId=4, movieId=1732, tag=&#39;great dialogue&#39;, timestamp=1573943604), Row(userId=4, movieId=7569, tag=&#34;so bad it&#39;s good&#34;, timestamp=1573943455), Row(userId=4, movieId=44665, tag=&#39;unreliable narrators&#39;, timestamp=1573943619), Row(userId=4, movieId=115569, tag=&#39;tense&#39;, timestamp=1573943077), Row(userId=4, movieId=115713, tag=&#39;artificial intelligence&#39;, timestamp=1573942979), Row(userId=4, movieId=115713, tag=&#39;philosophical&#39;, timestamp=1573943033), Row(userId=4, movieId=115713, tag=&#39;tense&#39;, timestamp=1573943042)] 
 
-Chunksize block = line 11000001 until 11500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
++------+-------+--------------------+----------+
+|userId|movieId|                 tag| timestamp|
++------+-------+--------------------+----------+
+|     3|    260|             classic|1439472355|
+|     3|    260|              sci-fi|1439472256|
+|     4|   1732|         dark comedy|1573943598|
+|     4|   1732|      great dialogue|1573943604|
+|     4|   7569|    so bad it&#39;s good|1573943455|
+|     4|  44665|unreliable narrators|1573943619|
+|     4| 115569|               tense|1573943077|
+|     4| 115713|artificial intell...|1573942979|
+|     4| 115713|       philosophical|1573943033|
+|     4| 115713|               tense|1573943042|
++------+-------+--------------------+----------+
+only showing top 10 rows
 
-Chunksize block = line 11500001 until 12000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- show:  None 
 
-Chunksize block = line 12000001 until 12500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- isEmpty:  False 
 
-Chunksize block = line 12500001 until 13000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+22/10/18 01:20:22 WARN CacheManager: Asked to cache already cached data.
+- cache DataFrame[userId: int, movieId: int, tag: string, timestamp: int] 
 
-Chunksize block = line 13000001 until 13500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- persist:  22/10/18 01:20:22 WARN CacheManager: Asked to cache already cached data.
+DataFrame[userId: int, movieId: int, tag: string, timestamp: int] 
 
-Chunksize block = line 13500001 until 14000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+- storageLevel:  Disk Memory Deserialized 1x Replicated 
 
-Chunksize block = line 14000001 until 14500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+22/10/18 01:20:22 WARN TaskSetManager: Stage 24 contains a task of very large size (1024 KiB). The maximum recommended task size is 1000 KiB.
+- count:  1093360 
 
-Chunksize block = line 14500001 until 15000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
+22/10/18 01:20:22 WARN TaskSetManager: Stage 27 contains a task of very large size (1024 KiB). The maximum recommended task size is 1000 KiB.
++-------+-----------------+------------------+--------------------+
+|summary|           userId|           movieId|           timestamp|
++-------+-----------------+------------------+--------------------+
+|  count|          1093360|           1093360|             1093360|
+|   mean|67590.22463324065|  58492.7644389771|  1.43011549764337E9|
+| stddev|51521.13756056981|59687.312817478196|1.1773844833353016E8|
+|    min|                3|                 1|          1135429210|
+|    max|           162534|            209063|          1574316696|
++-------+-----------------+------------------+--------------------+
 
-Chunksize block = line 15000001 until 15500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 15500001 until 16000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 16000001 until 16500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 16500001 until 17000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 17000001 until 17500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 17500001 until 18000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 18000001 until 18500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 18500001 until 19000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 19000001 until 19500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 19500001 until 20000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 20000001 until 20500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 20500001 until 21000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 21000001 until 21500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 21500001 until 22000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 22000001 until 22500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 22500001 until 23000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 23000001 until 23500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 23500001 until 24000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 24000001 until 24500000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 24500001 until 25000000
-Memory usage of dataframe is 15.26 MB
-Memory usage after optimization is: 6.68 MB
-Decreased by 56.2%
-
-Chunksize block = line 25000001 until 25500000
-Memory usage of dataframe is 0.00 MB
-Memory usage after optimization is: 0.00 MB
-Decreased by 53.9%
+- descriptive statistics:  None 
 
 </pre>
 </div>
@@ -15197,9 +15062,7 @@ Decreased by 53.9%
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#data.show(10)</span>
-
-<span class="n">data</span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
      </div>
@@ -15213,17 +15076,54 @@ Decreased by 53.9%
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+<div class="jp-OutputArea-child">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>DataFrame[userId: int, movieId: int, rating: float, timestamp: int]</pre>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>22/10/18 01:17:35 WARN TaskSetManager: Stage 6 contains a task of very large size (1024 KiB). The maximum recommended task size is 1000 KiB.
+</pre>
 </div>
+</div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>[Stage 6:==========================================&gt;              (27 + 9) / 36]</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+-------+-----------------+----------------+--------------------+
+|summary|           userId|         movieId|           timestamp|
++-------+-----------------+----------------+--------------------+
+|  count|          1093360|         1093360|             1093360|
+|   mean|67590.22463324065|58492.7644389771|  1.43011549764337E9|
+| stddev|51521.13756056981|59687.3128174782|1.1773844833353017E8|
+|    min|                3|               1|          1135429210|
+|    max|           162534|          209063|          1574316696|
++-------+-----------------+----------------+--------------------+
+
+- descriptive statistics:  None 
+
+</pre>
+</div>
+</div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
 </div>
 
 </div>
@@ -15241,35 +15141,6 @@ Decreased by 53.9%
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Create PySpark DataFrame from Pandas</span>
-
-<span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span><span class="p">,</span> <span class="n">LongType</span><span class="p">,</span> <span class="n">StringType</span>
-
-<span class="n">schema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">(</span>
-                    <span class="p">[</span>
-                        <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">LongType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;The movie unique identifier.&#39;</span><span class="p">}),</span>
-                        <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;The movie title.&#39;</span><span class="p">}),</span>
-                        <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;genres&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">,</span> <span class="n">metadata</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;The movie genre.&#39;</span><span class="p">})</span>
-                    <span class="p">]</span>
-                    <span class="p">)</span>
-
-<span class="n">sparkDF</span><span class="o">=</span><span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="p">)</span>
-<span class="n">sparkDF</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
