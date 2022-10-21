@@ -18,8 +18,8 @@ ETL/ApacheNifi/binaries/jdk/*
 !ETL/ApacheNifi/binaries/apache-nifi/index.md
 !ETL/ApacheNifi/binaries/jdk/index.md
 
-collaborative-data-hub/JupyterHub/binaries/*
-!collaborative-data-hub/JupyterHub/binaries/index.md
+collaborative-data-hub/JupyterHub/binaries/jdk/*
+!collaborative-data-hub/JupyterHub/binaries/jdk/index.md
 
 file-transfer-protocol/FTP/binaries/*
 !file-transfer-protocol/FTP/binaries/index.md
