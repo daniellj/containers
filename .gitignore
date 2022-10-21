@@ -29,10 +29,10 @@ file-transfer-protocol/FTP/binaries/*
 file-transfer-protocol/SFTP/binaries/*
 !file-transfer-protocol/SFTP/binaries/index.md
 
-ETL/StreamSet/binaries/jdk/*
-!ETL/StreamSet/binaries/jdk/index.md
-ETL/StreamSet/binaries/StreamSetsDataCollector/*
-!ETL/StreamSet/binaries/StreamSetsDataCollector/index.md
+ETL/StreamSets/binaries/jdk/*
+!ETL/StreamSets/binaries/jdk/index.md
+ETL/StreamSets/binaries/StreamSetsDataCollector/*
+!ETL/StreamSets/binaries/StreamSetsDataCollector/index.md
 
 messaging-layer/ApacheKafka/binaries/apache-kafka/*
 messaging-layer/ApacheKafka/binaries/jdk/*
