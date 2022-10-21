@@ -324,7 +324,7 @@ print(f'context hadoop version = {s_context_dl._jvm.org.apache.hadoop.util.Versi
 import pysftp
 from pandas import read_csv as pandas_read_csv
 from pyspark.sql.types import StructType, StructField, StringType, IntegerType, FloatType, TimestampType
-from pyspark.sql.functions import current_timestamp, date_format
+from pyspark.sql.functions import current_timestamp
 
 # SFTP config connection
 cnopts = pysftp.CnOpts()
@@ -392,7 +392,7 @@ print( "- count: ", data_dl.count())
 
 # ### Create tables WITHOUT the metastore - Delta Lake
 
-# In[43]:
+# In[8]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -430,25 +430,25 @@ CREATE TABLE IF NOT EXISTS bronze.ratings (
 #data_dl.createOrReplaceTempView("bronze.ratings")
 
 
-# In[44]:
+# In[9]:
 
 
 s_session_delta.sql("SHOW DATABASES;").show()
 
 
-# In[45]:
+# In[10]:
 
 
 s_session_delta.sql("SHOW SCHEMAS;").show()
 
 
-# In[46]:
+# In[11]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED default""").head(20)
 
 
-# In[47]:
+# In[12]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED bronze""").head(20)
@@ -460,7 +460,7 @@ s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED bronze""").head(20)
 s_session_delta.sql("SHOW TABLES IN default;").show()
 
 
-# In[32]:
+# In[13]:
 
 
 s_session_delta.sql("SHOW TABLES IN bronze;").show()
@@ -474,7 +474,7 @@ s_session_delta.sql("SHOW TABLE EXTENDED IN bronze like 'tags'").head(20)
 
 # ### Create tables WITH the metastore - Delta Lake
 
-# In[61]:
+# In[126]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -482,7 +482,7 @@ s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS silver LOCATION 'hdfs://hdpmast
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS gold LOCATION 'hdfs://hdpmaster:9000/deltalake/gold';")
 
 
-# In[62]:
+# In[127]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED bronze""").head(20)
@@ -500,7 +500,7 @@ s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED silver""").head(20)
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED gold""").head(20)
 
 
-# In[64]:
+# In[14]:
 
 
 # https://learn.microsoft.com/en-us/azure/databricks/delta/table-properties
@@ -508,7 +508,7 @@ s_session_delta.conf.set("delta.autoOptimize.autoCompact", "true")
 s_session_delta.conf.set("delta.autoOptimize.optimizeWrite", "true")
 
 
-# In[65]:
+# In[15]:
 
 
 # Create "bronze.tags" table in the metastore
@@ -530,7 +530,7 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
   .execute()
 
 
-# In[66]:
+# In[16]:
 
 
 # Create "bronze.ratings" table in the metastore
@@ -554,7 +554,7 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
 
 # ### Write data in table - Delta Lake
 
-# In[67]:
+# In[19]:
 
 
 s_session_delta.sql("USE SCHEMA bronze;")
@@ -566,13 +566,13 @@ data_dl.write.format("delta").mode("append").saveAsTable(name='bronze.tags')
 
 # ### Read data in table - Delta Lake
 
-# In[83]:
+# In[17]:
 
 
 s_session_delta.sql("SELECT * FROM bronze.tags ORDER BY userId LIMIT 15;").show(15)
 
 
-# In[69]:
+# In[20]:
 
 
 s_session_delta.sql("SELECT COUNT(*) FROM bronze.tags;").show()
@@ -613,7 +613,7 @@ deltaTable_tags_by_path = DeltaTable.forPath(sparkSession=s_session_delta, path=
 deltaTable_tags_by_path.detail().head(10)
 
 
-# In[71]:
+# In[94]:
 
 
 s_session_delta.sql("DESCRIBE DETAIL 'hdfs://hdpmaster:9000/deltalake/bronze/tags'").head(10)
@@ -625,7 +625,7 @@ s_session_delta.sql("DESCRIBE DETAIL 'hdfs://hdpmaster:9000/deltalake/bronze/tag
 deltaTable_tags_by_path.history().head(10)
 
 
-# In[75]:
+# In[100]:
 
 
 s_session_delta.sql("DESCRIBE HISTORY 'hdfs://hdpmaster:9000/deltalake/bronze/tags' LIMIT 10").head(10)
@@ -686,4 +686,55 @@ deltaTable_tags_by_tablename.optimize().executeCompaction()
 
 
 #s_session_delta.sql("DROP TABLE IF EXISTS bronze.tags").head(10)
+
+
+# In[ ]:
+
+
+
+
+
+# In[106]:
+
+
+s_session_delta.sql("SELECT COUNT(*) FROM bronze.tags LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze/tags'").show()
+
+#s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED 'hdfs://hdpmaster:9000/deltalake/bronze/tags'""").head(20)
+
+#s_session_delta.sql("USE SCHEMA bronze;")
+
+#SELECT count(1) FROM `delta`.`abfss://depts/finance/forecast/somefile`
+
+#s_session_delta.sql("CREATE EXTERNAL LOCATION 'bronze.tags' URL 'hdfs://hdpmaster:9000/deltalake/bronze/tags'")
+
+
+# In[138]:
+
+
+s_session_delta.sql("DESCRIBE FORMATTED delta.`hdfs://hdpmaster:9000/deltalake/bronze/tags`").show()
+
+
+# In[149]:
+
+
+#s_session_delta.read.format("delta").load("hdfs://hdpmaster:9000/deltalake/bronze/tags").show(10)
+s_session_delta.sql("SELECT * FROM delta.`hdfs://hdpmaster:9000/deltalake/bronze/tags` LIMIT 10;").show(truncate=False)
+
+
+# In[144]:
+
+
+s_session_delta.catalog.listTables("bronze")
+
+
+# In[141]:
+
+
+
+
+
+# In[ ]:
+
+
+
 

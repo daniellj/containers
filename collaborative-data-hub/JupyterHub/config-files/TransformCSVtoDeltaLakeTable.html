@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>teste</title><script type="text/javascript" src="http://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=ISzpT0Tp9W2GGW1LPPCgzqF_i31LqsTXxFCPGFjIZFAQn90bC_mYDq7qHxK7syY4pOpPWZZkTpc8WN-7kyqSzdx1kbvRTaOtU3v_HIacG8mqveHvtWYFE1N0wHmLjDNn" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>teste</title><script type="text/javascript" src="http://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=mv8vuCO9HempUxRtTmXBEHKMY61IZ8lovh_NT2bEA-4SOUVWY7toEOeTm8m9rBDpeH-qGA6rg_7zqr7-40-bvCU6bloihwUcf8veFTRSv775ARlFL0v7mLnxmbYIdVqq" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -15143,13 +15143,13 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.341-b10, mixed mode)
 <pre>Ivy Default Cache set to: /home/admin/.ivy2/cache
 The jars for the packages stored in: /home/admin/.ivy2/jars
 io.delta#delta-core_2.12 added as a dependency
-:: resolving dependencies :: org.apache.spark#spark-submit-parent-a5918e50-88cc-423e-a711-0cef267a5d22;1.0
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-d9d97532-bb4c-4227-9d95-0dfb34859cbc;1.0
 	confs: [default]
 	found io.delta#delta-core_2.12;2.1.0 in central
 	found io.delta#delta-storage;2.1.0 in central
 	found org.antlr#antlr4-runtime;4.8 in central
 	found org.codehaus.jackson#jackson-core-asl;1.9.13 in central
-:: resolution report :: resolve 164ms :: artifacts dl 6ms
+:: resolution report :: resolve 187ms :: artifacts dl 6ms
 	:: modules in use:
 	io.delta#delta-core_2.12;2.1.0 from central in [default]
 	io.delta#delta-storage;2.1.0 from central in [default]
@@ -15161,9 +15161,9 @@ io.delta#delta-core_2.12 added as a dependency
 	---------------------------------------------------------------------
 	|      default     |   4   |   0   |   0   |   0   ||   4   |   0   |
 	---------------------------------------------------------------------
-:: retrieving :: org.apache.spark#spark-submit-parent-a5918e50-88cc-423e-a711-0cef267a5d22
+:: retrieving :: org.apache.spark#spark-submit-parent-d9d97532-bb4c-4227-9d95-0dfb34859cbc
 	confs: [default]
-	0 artifacts copied, 4 already retrieved (0kB/4ms)
+	0 artifacts copied, 4 already retrieved (0kB/7ms)
 </pre>
 </div>
 </div>
@@ -15173,7 +15173,7 @@ io.delta#delta-core_2.12 added as a dependency
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>22/10/20 17:57:36 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/10/21 13:59:38 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 </pre>
 </div>
 </div>
@@ -15194,7 +15194,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>22/10/20 17:57:40 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+<pre>22/10/21 13:59:42 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
 </pre>
 </div>
 </div>
@@ -15270,7 +15270,7 @@ context hadoop version = 3.3.2
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pysftp</span>
 <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">read_csv</span> <span class="k">as</span> <span class="n">pandas_read_csv</span>
 <span class="kn">from</span> <span class="nn">pyspark.sql.types</span> <span class="kn">import</span> <span class="n">StructType</span><span class="p">,</span> <span class="n">StructField</span><span class="p">,</span> <span class="n">StringType</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">,</span> <span class="n">FloatType</span><span class="p">,</span> <span class="n">TimestampType</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">current_timestamp</span><span class="p">,</span> <span class="n">date_format</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql.functions</span> <span class="kn">import</span> <span class="n">current_timestamp</span>
 
 <span class="c1"># SFTP config connection</span>
 <span class="n">cnopts</span> <span class="o">=</span> <span class="n">pysftp</span><span class="o">.</span><span class="n">CnOpts</span><span class="p">()</span>
@@ -15416,16 +15416,16 @@ Decreased by 33.9%
 <pre>+------+-------+--------------------+----------+--------------------+
 |userId|movieId|                 tag| timestamp|    created_datetime|
 +------+-------+--------------------+----------+--------------------+
-|     3|    260|             classic|1439472355|2022-10-20 17:40:...|
-|     3|    260|              sci-fi|1439472256|2022-10-20 17:40:...|
-|     4|   1732|         dark comedy|1573943598|2022-10-20 17:40:...|
-|     4|   1732|      great dialogue|1573943604|2022-10-20 17:40:...|
-|     4|   7569|    so bad it&#39;s good|1573943455|2022-10-20 17:40:...|
-|     4|  44665|unreliable narrators|1573943619|2022-10-20 17:40:...|
-|     4| 115569|               tense|1573943077|2022-10-20 17:40:...|
-|     4| 115713|artificial intell...|1573942979|2022-10-20 17:40:...|
-|     4| 115713|       philosophical|1573943033|2022-10-20 17:40:...|
-|     4| 115713|               tense|1573943042|2022-10-20 17:40:...|
+|     3|    260|             classic|1439472355|2022-10-21 13:59:...|
+|     3|    260|              sci-fi|1439472256|2022-10-21 13:59:...|
+|     4|   1732|         dark comedy|1573943598|2022-10-21 13:59:...|
+|     4|   1732|      great dialogue|1573943604|2022-10-21 13:59:...|
+|     4|   7569|    so bad it&#39;s good|1573943455|2022-10-21 13:59:...|
+|     4|  44665|unreliable narrators|1573943619|2022-10-21 13:59:...|
+|     4| 115569|               tense|1573943077|2022-10-21 13:59:...|
+|     4| 115713|artificial intell...|1573942979|2022-10-21 13:59:...|
+|     4| 115713|       philosophical|1573943033|2022-10-21 13:59:...|
+|     4| 115713|               tense|1573943042|2022-10-21 13:59:...|
 +------+-------+--------------------+----------+--------------------+
 only showing top 10 rows
 
@@ -15527,7 +15527,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[43]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;CREATE SCHEMA IF NOT EXISTS bronze LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze&#39;;&quot;</span><span class="p">)</span>
@@ -15548,7 +15548,7 @@ only showing top 10 rows
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[43]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -15608,7 +15608,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[44]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SHOW DATABASES;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -15653,7 +15653,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[45]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SHOW SCHEMAS;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -15698,7 +15698,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[46]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;DESCRIBE SCHEMA EXTENDED default&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
@@ -15717,7 +15717,7 @@ only showing top 10 rows
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[46]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 
 
 
@@ -15741,7 +15741,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[47]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;DESCRIBE SCHEMA EXTENDED bronze&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
@@ -15760,7 +15760,7 @@ only showing top 10 rows
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[47]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[12]:</div>
 
 
 
@@ -15768,7 +15768,7 @@ only showing top 10 rows
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
 <pre>[Row(info_name=&#39;Namespace Name&#39;, info_value=&#39;bronze&#39;),
  Row(info_name=&#39;Comment&#39;, info_value=&#39;&#39;),
- Row(info_name=&#39;Location&#39;, info_value=&#39;file:/home/admin/notebooks/spark-warehouse/bronze.db&#39;),
+ Row(info_name=&#39;Location&#39;, info_value=&#39;hdfs://hdpmaster:9000/deltalake/bronze&#39;),
  Row(info_name=&#39;Owner&#39;, info_value=&#39;admin&#39;),
  Row(info_name=&#39;Properties&#39;, info_value=&#39;&#39;)]</pre>
 </div>
@@ -15826,7 +15826,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SHOW TABLES IN bronze;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -15852,7 +15852,6 @@ only showing top 10 rows
 <pre>+---------+---------+-----------+
 |namespace|tableName|isTemporary|
 +---------+---------+-----------+
-|   bronze|     tags|      false|
 +---------+---------+-----------+
 
 </pre>
@@ -15918,7 +15917,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[61]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[126]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;CREATE SCHEMA IF NOT EXISTS bronze LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze&#39;;&quot;</span><span class="p">)</span>
@@ -15939,7 +15938,7 @@ only showing top 10 rows
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[61]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[126]:</div>
 
 
 
@@ -15959,7 +15958,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[62]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[127]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;DESCRIBE SCHEMA EXTENDED bronze&quot;&quot;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
@@ -15978,7 +15977,7 @@ only showing top 10 rows
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[62]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[127]:</div>
 
 
 
@@ -16088,7 +16087,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[64]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://learn.microsoft.com/en-us/azure/databricks/delta/table-properties</span>
@@ -16106,7 +16105,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[65]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create &quot;bronze.tags&quot; table in the metastore</span>
@@ -16139,15 +16138,24 @@ only showing top 10 rows
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[65]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;delta.tables.DeltaTable at 0x7fbeec87c7f0&gt;</pre>
+<pre>&lt;delta.tables.DeltaTable at 0x7f174fbad030&gt;</pre>
 </div>
 
 </div>
@@ -16161,7 +16169,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[66]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create &quot;bronze.ratings&quot; table in the metastore</span>
@@ -16194,15 +16202,24 @@ only showing top 10 rows
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[66]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;delta.tables.DeltaTable at 0x7fbeec87e200&gt;</pre>
+<pre>&lt;delta.tables.DeltaTable at 0x7f1738a51210&gt;</pre>
 </div>
 
 </div>
@@ -16227,7 +16244,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[67]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;USE SCHEMA bronze;&quot;</span><span class="p">)</span>
@@ -16278,7 +16295,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[83]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM bronze.tags ORDER BY userId LIMIT 15;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
@@ -16295,6 +16312,15 @@ only showing top 10 rows
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>[Stage 15:======================================&gt;                   (2 + 1) / 3]</pre>
+</div>
+</div>
 <div class="jp-OutputArea-child">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
@@ -16324,6 +16350,15 @@ only showing top 10 rows
 </pre>
 </div>
 </div>
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
 
 </div>
 
@@ -16334,7 +16369,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[69]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT COUNT(*) FROM bronze.tags;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -16360,7 +16395,7 @@ only showing top 10 rows
 <pre>+--------+
 |count(1)|
 +--------+
-| 1093360|
+| 2186720|
 +--------+
 
 </pre>
@@ -16594,7 +16629,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[71]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[94]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;DESCRIBE DETAIL &#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -16611,15 +16646,24 @@ only showing top 10 rows
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[71]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[94]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[Row(format=&#39;delta&#39;, id=&#39;772a8dd7-e548-4ec4-ad09-f1ac0b88b1c3&#39;, name=None, description=&#39;Table to store the genre for each movie.&#39;, location=&#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;, createdAt=datetime.datetime(2022, 10, 20, 18, 28, 18, 228000), lastModified=datetime.datetime(2022, 10, 20, 18, 29, 6, 225000), partitionColumns=[&#39;created_date_year&#39;, &#39;created_date_month&#39;], numFiles=48, sizeInBytes=11238012, properties={&#39;description&#39;: &#39;Table to store the genre for each movie.&#39;}, minReaderVersion=1, minWriterVersion=4)]</pre>
+<pre>[Row(format=&#39;delta&#39;, id=&#39;772a8dd7-e548-4ec4-ad09-f1ac0b88b1c3&#39;, name=None, description=&#39;Table to store the genre for each movie.&#39;, location=&#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;, createdAt=datetime.datetime(2022, 10, 20, 18, 28, 18, 228000), lastModified=datetime.datetime(2022, 10, 20, 18, 34, 14, 706000), partitionColumns=[&#39;created_date_year&#39;, &#39;created_date_month&#39;], numFiles=1, sizeInBytes=10289909, properties={&#39;description&#39;: &#39;Table to store the genre for each movie.&#39;}, minReaderVersion=1, minWriterVersion=4)]</pre>
 </div>
 
 </div>
@@ -16673,7 +16717,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[75]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[100]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;DESCRIBE HISTORY &#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39; LIMIT 10&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
@@ -16690,15 +16734,25 @@ only showing top 10 rows
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[75]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[100]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>[Row(version=1, timestamp=datetime.datetime(2022, 10, 20, 18, 29, 6, 225000), userId=None, userName=None, operation=&#39;WRITE&#39;, operationParameters={&#39;mode&#39;: &#39;Append&#39;, &#39;partitionBy&#39;: &#39;[]&#39;}, job=None, notebook=None, clusterId=None, readVersion=0, isolationLevel=&#39;Serializable&#39;, isBlindAppend=True, operationMetrics={&#39;numOutputRows&#39;: &#39;1093360&#39;, &#39;numOutputBytes&#39;: &#39;11238012&#39;, &#39;numFiles&#39;: &#39;48&#39;}, userMetadata=None, engineInfo=&#39;Apache-Spark/3.3.0 Delta-Lake/2.1.0&#39;),
+<pre>[Row(version=2, timestamp=datetime.datetime(2022, 10, 20, 18, 34, 14, 706000), userId=None, userName=None, operation=&#39;OPTIMIZE&#39;, operationParameters={&#39;predicate&#39;: &#39;[]&#39;, &#39;zOrderBy&#39;: &#39;[]&#39;}, job=None, notebook=None, clusterId=None, readVersion=1, isolationLevel=&#39;SnapshotIsolation&#39;, isBlindAppend=False, operationMetrics={&#39;numRemovedBytes&#39;: &#39;11238012&#39;, &#39;p50FileSize&#39;: &#39;10289909&#39;, &#39;p25FileSize&#39;: &#39;10289909&#39;, &#39;numAddedFiles&#39;: &#39;1&#39;, &#39;minFileSize&#39;: &#39;10289909&#39;, &#39;p75FileSize&#39;: &#39;10289909&#39;, &#39;numAddedBytes&#39;: &#39;10289909&#39;, &#39;maxFileSize&#39;: &#39;10289909&#39;, &#39;numRemovedFiles&#39;: &#39;48&#39;}, userMetadata=None, engineInfo=&#39;Apache-Spark/3.3.0 Delta-Lake/2.1.0&#39;),
+ Row(version=1, timestamp=datetime.datetime(2022, 10, 20, 18, 29, 6, 225000), userId=None, userName=None, operation=&#39;WRITE&#39;, operationParameters={&#39;mode&#39;: &#39;Append&#39;, &#39;partitionBy&#39;: &#39;[]&#39;}, job=None, notebook=None, clusterId=None, readVersion=0, isolationLevel=&#39;Serializable&#39;, isBlindAppend=True, operationMetrics={&#39;numOutputRows&#39;: &#39;1093360&#39;, &#39;numOutputBytes&#39;: &#39;11238012&#39;, &#39;numFiles&#39;: &#39;48&#39;}, userMetadata=None, engineInfo=&#39;Apache-Spark/3.3.0 Delta-Lake/2.1.0&#39;),
  Row(version=0, timestamp=datetime.datetime(2022, 10, 20, 18, 28, 18, 275000), userId=None, userName=None, operation=&#39;CREATE TABLE&#39;, operationParameters={&#39;description&#39;: &#39;Table to store the genre for each movie.&#39;, &#39;partitionBy&#39;: &#39;[&#34;created_date_year&#34;,&#34;created_date_month&#34;]&#39;, &#39;properties&#39;: &#39;{&#34;description&#34;:&#34;Table to store the genre for each movie.&#34;}&#39;, &#39;isManaged&#39;: &#39;false&#39;}, job=None, notebook=None, clusterId=None, readVersion=None, isolationLevel=&#39;Serializable&#39;, isBlindAppend=True, operationMetrics={}, userMetadata=None, engineInfo=&#39;Apache-Spark/3.3.0 Delta-Lake/2.1.0&#39;)]</pre>
 </div>
 
@@ -17107,6 +17161,312 @@ only showing top 10 rows
 
 </div>
 
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[106]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT COUNT(*) FROM bronze.tags LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1">#s_session_delta.sql(&quot;&quot;&quot;DESCRIBE SCHEMA EXTENDED &#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;&quot;&quot;&quot;).head(20)</span>
+
+<span class="c1">#s_session_delta.sql(&quot;USE SCHEMA bronze;&quot;)</span>
+
+<span class="c1">#SELECT count(1) FROM `delta`.`abfss://depts/finance/forecast/somefile`</span>
+
+<span class="c1">#s_session_delta.sql(&quot;CREATE EXTERNAL LOCATION &#39;bronze.tags&#39; URL &#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;&quot;)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ParseException</span>                            Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In [106], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">s_session_delta</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">sql</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">SELECT COUNT(*) FROM bronze.tags LOCATION </span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">hdfs://hdpmaster:9000/deltalake/bronze/tags</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#34;</span><span class="ansi-yellow-bg">)</span><span style="color: rgb(98,98,98)">.</span>show()
+
+File <span class="ansi-green-fg">/srv/jupyterhub/lib/python3.10/site-packages/pyspark/sql/session.py:1034</span>, in <span class="ansi-cyan-fg">SparkSession.sql</span><span class="ansi-blue-fg">(self, sqlQuery, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1032</span>     sqlQuery <span style="color: rgb(98,98,98)">=</span> formatter<span style="color: rgb(98,98,98)">.</span>format(sqlQuery, <span style="color: rgb(98,98,98)">*</span><span style="color: rgb(98,98,98)">*</span>kwargs)
+<span class="ansi-green-intense-fg ansi-bold">   1033</span> <span class="ansi-bold" style="color: rgb(0,135,0)">try</span>:
+<span class="ansi-green-fg">-&gt; 1034</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">return</span> DataFrame(<span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">_jsparkSession</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">sql</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">sqlQuery</span><span class="ansi-yellow-bg">)</span>, <span style="color: rgb(0,135,0)">self</span>)
+<span class="ansi-green-intense-fg ansi-bold">   1035</span> <span class="ansi-bold" style="color: rgb(0,135,0)">finally</span>:
+<span class="ansi-green-intense-fg ansi-bold">   1036</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">len</span>(kwargs) <span style="color: rgb(98,98,98)">&gt;</span> <span style="color: rgb(98,98,98)">0</span>:
+
+File <span class="ansi-green-fg">/srv/jupyterhub/lib/python3.10/site-packages/py4j/java_gateway.py:1321</span>, in <span class="ansi-cyan-fg">JavaMember.__call__</span><span class="ansi-blue-fg">(self, *args)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1315</span> command <span style="color: rgb(98,98,98)">=</span> proto<span style="color: rgb(98,98,98)">.</span>CALL_COMMAND_NAME <span style="color: rgb(98,98,98)">+</span>\
+<span class="ansi-green-intense-fg ansi-bold">   1316</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>command_header <span style="color: rgb(98,98,98)">+</span>\
+<span class="ansi-green-intense-fg ansi-bold">   1317</span>     args_command <span style="color: rgb(98,98,98)">+</span>\
+<span class="ansi-green-intense-fg ansi-bold">   1318</span>     proto<span style="color: rgb(98,98,98)">.</span>END_COMMAND_PART
+<span class="ansi-green-intense-fg ansi-bold">   1320</span> answer <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>gateway_client<span style="color: rgb(98,98,98)">.</span>send_command(command)
+<span class="ansi-green-fg">-&gt; 1321</span> return_value <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">get_return_value</span><span class="ansi-yellow-bg">(</span>
+<span class="ansi-green-intense-fg ansi-bold">   1322</span> <span class="ansi-yellow-bg">    </span><span class="ansi-yellow-bg">answer</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">gateway_client</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">target_id</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">name</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1324</span> <span class="ansi-bold" style="color: rgb(0,135,0)">for</span> temp_arg <span class="ansi-bold" style="color: rgb(175,0,255)">in</span> temp_args:
+<span class="ansi-green-intense-fg ansi-bold">   1325</span>     temp_arg<span style="color: rgb(98,98,98)">.</span>_detach()
+
+File <span class="ansi-green-fg">/srv/jupyterhub/lib/python3.10/site-packages/pyspark/sql/utils.py:196</span>, in <span class="ansi-cyan-fg">capture_sql_exception.&lt;locals&gt;.deco</span><span class="ansi-blue-fg">(*a, **kw)</span>
+<span class="ansi-green-intense-fg ansi-bold">    192</span> converted <span style="color: rgb(98,98,98)">=</span> convert_exception(e<span style="color: rgb(98,98,98)">.</span>java_exception)
+<span class="ansi-green-intense-fg ansi-bold">    193</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span class="ansi-bold" style="color: rgb(175,0,255)">not</span> <span style="color: rgb(0,135,0)">isinstance</span>(converted, UnknownException):
+<span class="ansi-green-intense-fg ansi-bold">    194</span>     <span style="color: rgb(95,135,135)"># Hide where the exception came from that shows a non-Pythonic</span>
+<span class="ansi-green-intense-fg ansi-bold">    195</span>     <span style="color: rgb(95,135,135)"># JVM exception message.</span>
+<span class="ansi-green-fg">--&gt; 196</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span> converted <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span style="color: rgb(0,135,0)">None</span>
+<span class="ansi-green-intense-fg ansi-bold">    197</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-intense-fg ansi-bold">    198</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">raise</span>
+
+<span class="ansi-red-fg">ParseException</span>: 
+Syntax error at or near &#39;&#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;&#39;: extra input &#39;&#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;&#39;(line 1, pos 42)
+
+== SQL ==
+SELECT COUNT(*) FROM bronze.tags LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;
+------------------------------------------^^^
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[138]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;DESCRIBE FORMATTED delta.`hdfs://hdpmaster:9000/deltalake/bronze/tags`&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+--------------------+--------------------+------------+
+|            col_name|           data_type|     comment|
++--------------------+--------------------+------------+
+|              userId|                 int|            |
+|             movieId|                 int|            |
+|                 tag|              string|Movie genre.|
+|           timestamp|                 int|            |
+|    created_datetime|           timestamp|            |
+|   created_date_year|                 int|            |
+|  created_date_month|                 int|            |
+|    created_date_day|                 int|            |
+|   modified_datetime|           timestamp|            |
+|                    |                    |            |
+|      # Partitioning|                    |            |
+|              Part 0|   created_date_year|            |
+|              Part 1|  created_date_month|            |
+|                    |                    |            |
+|# Detailed Table ...|                    |            |
+|                Name|delta.`hdfs://hdp...|            |
+|             Comment|Table to store th...|            |
+|            Location|hdfs://hdpmaster:...|            |
+|            Provider|               delta|            |
+|    Table Properties|[delta.minReaderV...|            |
++--------------------+--------------------+------------+
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[149]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#s_session_delta.read.format(&quot;delta&quot;).load(&quot;hdfs://hdpmaster:9000/deltalake/bronze/tags&quot;).show(10)</span>
+<span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM delta.`hdfs://hdpmaster:9000/deltalake/bronze/tags` LIMIT 10;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+------+-------+--------------+----------+-----------------------+-----------------+------------------+----------------+-----------------+
+|userId|movieId|tag           |timestamp |created_datetime       |created_date_year|created_date_month|created_date_day|modified_datetime|
++------+-------+--------------+----------+-----------------------+-----------------+------------------+----------------+-----------------+
+|60142 |8972   |treasure hunt |1526092962|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |8973   |child abuse   |1526097819|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |8973   |drag queens   |1526097836|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |8973   |gay           |1526097818|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |8973   |movie business|1526097849|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |8973   |sexuality     |1526097827|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |8973   |Transgender   |1526097843|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |26662  |coming of age |1525846564|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |26662  |Hayao Miyazaki|1525846559|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
+|60142 |26662  |magic         |1525846576|2022-10-20 18:29:03.125|2022             |10                |20              |null             |
++------+-------+--------------+----------+-----------------------+-----------------+------------------+----------------+-----------------+
+
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[144]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">catalog</span><span class="o">.</span><span class="n">listTables</span><span class="p">(</span><span class="s2">&quot;bronze&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[144]:</div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[141]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>[]</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>
