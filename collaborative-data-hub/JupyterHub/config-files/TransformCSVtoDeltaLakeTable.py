@@ -49,7 +49,7 @@ get_ipython().system('java -version')
 
 # ### Function to reduce memory usage in Pandas DataFrame
 
-# In[2]:
+# In[5]:
 
 
 import numpy as np
@@ -263,7 +263,7 @@ s_session.sql("select * from teste limit 10").show(truncate=False)
 
 # ### Connect from Apache Spark Cluster - with Delta Lake Session
 
-# In[3]:
+# In[2]:
 
 
 from pyspark import SparkConf, SparkContext
@@ -305,7 +305,7 @@ from delta import configure_spark_with_delta_pip, DeltaTable
 s_session_delta = configure_spark_with_delta_pip(spark_session_builder=builder).getOrCreate()
 
 
-# In[4]:
+# In[3]:
 
 
 from sys import version as sys_version
@@ -318,7 +318,7 @@ print(f'context hadoop version = {s_context_dl._jvm.org.apache.hadoop.util.Versi
 
 # ### Read .CSV from SFTP and load into a Pandas DataFrame - with Delta Lake Session
 
-# In[5]:
+# In[6]:
 
 
 import pysftp
@@ -372,7 +372,9 @@ with pysftp.Connection(environ["FTP_HOST"], port = int(environ["FTP_PORT"]), use
 connection.close()
 
 
-# In[6]:
+# ### Add new column
+
+# In[7]:
 
 
 data_dl = data_dl.withColumn("created_datetime", current_timestamp())
@@ -392,7 +394,7 @@ print( "- count: ", data_dl.count())
 
 # ### Create tables WITHOUT the metastore - Delta Lake
 
-# In[8]:
+# In[25]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -474,7 +476,7 @@ s_session_delta.sql("SHOW TABLE EXTENDED IN bronze like 'tags'").head(20)
 
 # ### Create tables WITH the metastore - Delta Lake
 
-# In[126]:
+# In[8]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -482,7 +484,7 @@ s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS silver LOCATION 'hdfs://hdpmast
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS gold LOCATION 'hdfs://hdpmaster:9000/deltalake/gold';")
 
 
-# In[127]:
+# In[26]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED bronze""").head(20)
@@ -508,7 +510,7 @@ s_session_delta.conf.set("delta.autoOptimize.autoCompact", "true")
 s_session_delta.conf.set("delta.autoOptimize.optimizeWrite", "true")
 
 
-# In[15]:
+# In[9]:
 
 
 # Create "bronze.tags" table in the metastore
@@ -554,10 +556,12 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
 
 # ### Write data in table - Delta Lake
 
-# In[19]:
+# In[77]:
 
 
 s_session_delta.sql("USE SCHEMA bronze;")
+#s_session_delta.sql("DELETE FROM bronze.tags")
+
 #ata_dl.write.format("delta").mode("append").save("hdfs://hdpmaster:9000/deltalake/bronze.tags")
 data_dl.write.format("delta").mode("append").saveAsTable(name='bronze.tags')
 
@@ -566,13 +570,13 @@ data_dl.write.format("delta").mode("append").saveAsTable(name='bronze.tags')
 
 # ### Read data in table - Delta Lake
 
-# In[17]:
+# In[78]:
 
 
 s_session_delta.sql("SELECT * FROM bronze.tags ORDER BY userId LIMIT 15;").show(15)
 
 
-# In[20]:
+# In[65]:
 
 
 s_session_delta.sql("SELECT COUNT(*) FROM bronze.tags;").show()
@@ -582,7 +586,7 @@ s_session_delta.sql("SELECT COUNT(*) FROM bronze.tags;").show()
 
 # ### Create staging data area
 
-# In[ ]:
+# In[13]:
 
 
 # Create "bronze.tags" table in the metastore
@@ -604,99 +608,134 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
   .execute()
 
 
-# ### Check before changes
+# ### Check before changes - BUSINESS TABLE
 
-# In[ ]:
+# In[66]:
 
 
+s_session_delta.sql("SELECT * FROM bronze.tags WHERE userId IN (3,4) Order by userId LIMIT 10").show()
 
+
+# ### get only register with userId IN (3,4) from DataFrame
+
+# In[67]:
+
+
+data_dl_staging = data_dl.filter("userId IN (3,4)")
 
 
 # ### Create sample data and store in STAGING TABLE
 
-# In[ ]:
+# In[68]:
 
 
+s_session_delta.sql("USE SCHEMA bronze;")
+
+# truncate staging table
+s_session_delta.sql("DELETE FROM bronze.tags_staging")
+
+#data_dl_staging.write.format("delta").mode("append").save("hdfs://hdpmaster:9000/deltalake/bronze.tags")
+data_dl_staging.write.format("delta").mode("append").saveAsTable(name='bronze.tags_staging')
+
+# mode = append, overwrite, error, errorifexists, ignore
+
+# count registers
+s_session_delta.sql("SELECT count(*) FROM bronze.tags_staging WHERE userId IN (3,4)").show()
 
 
-
-# In[ ]:
-
+# In[79]:
 
 
+s_session_delta.sql("SELECT * FROM bronze.tags_staging WHERE userId IN (3,4) Order by userId LIMIT 15").show()
+
+
+# ### Update the tag description for UserId 3 and 4
+
+# In[80]:
+
+
+# adjust the tag description for UserId 3 and 4
+# with path
+#s_session_delta.sql("UPDATE delta.`hdfs://hdpmaster:9000/deltalake/bronze/tags_staging` SET tag = 'TERROR' WHERE userId IN (3, 4)")
+
+# with table name
+s_session_delta.sql("UPDATE bronze.tags_staging SET tag = 'TERROR' WHERE userId IN (3, 4)")
+
+
+# In[81]:
+
+
+s_session_delta.sql("SELECT * FROM bronze.tags_staging WHERE userId IN (3,4) Order by userId LIMIT 15").show()
+
+
+# ### Delete rows for UserId = 4 for Business Table
+
+# In[82]:
+
+
+s_session_delta.sql("DELETE FROM bronze.tags WHERE userId = 4")
+s_session_delta.sql("SELECT * FROM bronze.tags WHERE userId IN (3,4) Order by userId LIMIT 15").show()
 
 
 # ### MERGE apply between STAGING TABLE X BUSINESS TABLE
 
 # ### UPSERT with MERGE
 
-# In[ ]:
+# In[83]:
 
 
-s_session_delta.sql("""MERGE INTO people10m
-                        USING people10mupdates
-                        ON people10m.id = people10mupdates.id
+from datetime import datetime
+
+s_session_delta.sql(f"""MERGE INTO bronze.tags as TARGET
+                        USING   (
+                                select   userId
+                                        ,movieId
+                                        ,tag
+                                        ,timestamp
+                                        ,created_datetime
+                                        ,created_date_year
+                                        ,created_date_month
+                                        ,created_date_day
+                                        ,'{datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]}' as modified_datetime
+                                FROM    bronze.tags_staging
+                                WHERE   userId IN (3, 4)
+                                ) as SOURCE
+                         ON TARGET.userId = SOURCE.userId 
+                        and TARGET.timestamp = SOURCE.timestamp
                         WHEN MATCHED THEN
                           UPDATE SET
-                            id = people10mupdates.id,
-                            firstName = people10mupdates.firstName,
-                            middleName = people10mupdates.middleName,
-                            lastName = people10mupdates.lastName,
-                            gender = people10mupdates.gender,
-                            birthDate = people10mupdates.birthDate,
-                            ssn = people10mupdates.ssn,
-                            salary = people10mupdates.salary
+                            tag = SOURCE.tag,
+                            modified_datetime = SOURCE.modified_datetime
                         WHEN NOT MATCHED
-                          THEN INSERT (
-                            id,
-                            firstName,
-                            middleName,
-                            lastName,
-                            gender,
-                            birthDate,
-                            ssn,
-                            salary
-                          )
-                          VALUES (
-                            people10mupdates.id,
-                            people10mupdates.firstName,
-                            people10mupdates.middleName,
-                            people10mupdates.lastName,
-                            people10mupdates.gender,
-                            people10mupdates.birthDate,
-                            people10mupdates.ssn,
-                            people10mupdates.salary
+                          THEN INSERT   (
+                                         userId
+                                        ,movieId
+                                        ,tag
+                                        ,timestamp
+                                        ,created_datetime
+                                        ,created_date_year
+                                        ,created_date_month
+                                        ,created_date_day
+                                        )
+                          VALUES        (
+                                        SOURCE.userId,
+                                        SOURCE.movieId,
+                                        SOURCE.tag,
+                                        SOURCE.timestamp,
+                                        SOURCE.created_datetime,
+                                        SOURCE.created_date_year,
+                                        SOURCE.created_date_month,
+                                        SOURCE.created_date_day
+                                        );
                           """)
-
-
-# ### DELETE with MERGE
-
-# In[ ]:
-
-
-
 
 
 # ### Check after changes
 
-# In[ ]:
+# In[84]:
 
 
-
-
-
-# In[ ]:
-
-
-
-
-
-# ### DROP STAGING table after MERGE process successfully
-
-# In[ ]:
-
-
-
+s_session_delta.sql("SELECT * FROM bronze.tags WHERE userId IN (3,4) Order by userId LIMIT 15").show()
 
 
 # ### EXPLAIN statement is used to provide logical/physical plans
