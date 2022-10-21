@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>teste</title><script type="text/javascript" src="http://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=mv8vuCO9HempUxRtTmXBEHKMY61IZ8lovh_NT2bEA-4SOUVWY7toEOeTm8m9rBDpeH-qGA6rg_7zqr7-40-bvCU6bloihwUcf8veFTRSv775ARlFL0v7mLnxmbYIdVqq" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>teste</title><script type="text/javascript" src="http://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=1hWu03CSofCcZnrVq8q9knNN92ygjBg-9tWpN-oJqK-aIGY3go87nJH6-lZX3XhN6-twp8FkCBWNudRTMVR8jTmXDXBKBMmRcoXa0C1spfZAUkLlYitaL-ic1oxJH8rw" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -16404,6 +16404,298 @@ only showing top 10 rows
 
 </div>
 
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Merge-(UPSERT-/-DELETE)">Merge (UPSERT / DELETE)<a class="anchor-link" href="#Merge-(UPSERT-/-DELETE)">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Create-staging-data-area">Create staging data area<a class="anchor-link" href="#Create-staging-data-area">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create &quot;bronze.tags&quot; table in the metastore</span>
+<span class="n">DeltaTable</span><span class="o">.</span><span class="n">createIfNotExists</span><span class="p">(</span><span class="n">sparkSession</span><span class="o">=</span><span class="n">s_session_delta</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">tableName</span><span class="p">(</span><span class="s2">&quot;bronze.tags_staging&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Movie genre.&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_datetime&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">TimestampType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_year&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;YEAR(created_datetime)&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_month&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;MONTH(created_datetime)&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_day&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;DAY(created_datetime)&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;modified_datetime&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">TimestampType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">comment</span><span class="p">(</span><span class="s2">&quot;Table to store the genre for each movie.&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="s2">&quot;Table to store the genre for each movie.&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">location</span><span class="p">(</span><span class="s2">&quot;hdfs://hdpmaster:9000/deltalake/bronze/tags_staging&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">partitionedBy</span><span class="p">(</span><span class="s2">&quot;created_date_year&quot;</span><span class="p">,</span> <span class="s2">&quot;created_date_month&quot;</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Check-before-changes">Check before changes<a class="anchor-link" href="#Check-before-changes">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Create-sample-data-and-store-in-STAGING-TABLE">Create sample data and store in STAGING TABLE<a class="anchor-link" href="#Create-sample-data-and-store-in-STAGING-TABLE">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="MERGE-apply-between-STAGING-TABLE-X-BUSINESS-TABLE">MERGE apply between STAGING TABLE X BUSINESS TABLE<a class="anchor-link" href="#MERGE-apply-between-STAGING-TABLE-X-BUSINESS-TABLE">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="UPSERT-with-MERGE">UPSERT with MERGE<a class="anchor-link" href="#UPSERT-with-MERGE">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;MERGE INTO people10m</span>
+<span class="s2">                        USING people10mupdates</span>
+<span class="s2">                        ON people10m.id = people10mupdates.id</span>
+<span class="s2">                        WHEN MATCHED THEN</span>
+<span class="s2">                          UPDATE SET</span>
+<span class="s2">                            id = people10mupdates.id,</span>
+<span class="s2">                            firstName = people10mupdates.firstName,</span>
+<span class="s2">                            middleName = people10mupdates.middleName,</span>
+<span class="s2">                            lastName = people10mupdates.lastName,</span>
+<span class="s2">                            gender = people10mupdates.gender,</span>
+<span class="s2">                            birthDate = people10mupdates.birthDate,</span>
+<span class="s2">                            ssn = people10mupdates.ssn,</span>
+<span class="s2">                            salary = people10mupdates.salary</span>
+<span class="s2">                        WHEN NOT MATCHED</span>
+<span class="s2">                          THEN INSERT (</span>
+<span class="s2">                            id,</span>
+<span class="s2">                            firstName,</span>
+<span class="s2">                            middleName,</span>
+<span class="s2">                            lastName,</span>
+<span class="s2">                            gender,</span>
+<span class="s2">                            birthDate,</span>
+<span class="s2">                            ssn,</span>
+<span class="s2">                            salary</span>
+<span class="s2">                          )</span>
+<span class="s2">                          VALUES (</span>
+<span class="s2">                            people10mupdates.id,</span>
+<span class="s2">                            people10mupdates.firstName,</span>
+<span class="s2">                            people10mupdates.middleName,</span>
+<span class="s2">                            people10mupdates.lastName,</span>
+<span class="s2">                            people10mupdates.gender,</span>
+<span class="s2">                            people10mupdates.birthDate,</span>
+<span class="s2">                            people10mupdates.ssn,</span>
+<span class="s2">                            people10mupdates.salary</span>
+<span class="s2">                          &quot;&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="DELETE-with-MERGE">DELETE with MERGE<a class="anchor-link" href="#DELETE-with-MERGE">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Check-after-changes">Check after changes<a class="anchor-link" href="#Check-after-changes">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="DROP-STAGING-table-after-MERGE-process-successfully">DROP STAGING table after MERGE process successfully<a class="anchor-link" href="#DROP-STAGING-table-after-MERGE-process-successfully">&#182;</a></h3>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div>

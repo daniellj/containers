@@ -578,6 +578,127 @@ s_session_delta.sql("SELECT * FROM bronze.tags ORDER BY userId LIMIT 15;").show(
 s_session_delta.sql("SELECT COUNT(*) FROM bronze.tags;").show()
 
 
+# ### Merge (UPSERT / DELETE)
+
+# ### Create staging data area
+
+# In[ ]:
+
+
+# Create "bronze.tags" table in the metastore
+DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
+  .tableName("bronze.tags_staging") \
+  .addColumn("userId", dataType=IntegerType(), nullable=True) \
+  .addColumn("movieId", dataType=IntegerType(), nullable=True) \
+  .addColumn("tag", dataType=StringType(), nullable=True, comment = "Movie genre.") \
+  .addColumn("timestamp", dataType=IntegerType(), nullable=True) \
+  .addColumn("created_datetime", dataType=TimestampType(), nullable=False) \
+  .addColumn("created_date_year", dataType=IntegerType(), nullable=False, generatedAlwaysAs="YEAR(created_datetime)") \
+  .addColumn("created_date_month", dataType=IntegerType(), nullable=False, generatedAlwaysAs="MONTH(created_datetime)") \
+  .addColumn("created_date_day", dataType=IntegerType(), nullable=False, generatedAlwaysAs="DAY(created_datetime)") \
+  .addColumn("modified_datetime", dataType=TimestampType(), nullable=True) \
+  .comment("Table to store the genre for each movie.") \
+  .property("description", "Table to store the genre for each movie.") \
+  .location("hdfs://hdpmaster:9000/deltalake/bronze/tags_staging") \
+  .partitionedBy("created_date_year", "created_date_month") \
+  .execute()
+
+
+# ### Check before changes
+
+# In[ ]:
+
+
+
+
+
+# ### Create sample data and store in STAGING TABLE
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# ### MERGE apply between STAGING TABLE X BUSINESS TABLE
+
+# ### UPSERT with MERGE
+
+# In[ ]:
+
+
+s_session_delta.sql("""MERGE INTO people10m
+                        USING people10mupdates
+                        ON people10m.id = people10mupdates.id
+                        WHEN MATCHED THEN
+                          UPDATE SET
+                            id = people10mupdates.id,
+                            firstName = people10mupdates.firstName,
+                            middleName = people10mupdates.middleName,
+                            lastName = people10mupdates.lastName,
+                            gender = people10mupdates.gender,
+                            birthDate = people10mupdates.birthDate,
+                            ssn = people10mupdates.ssn,
+                            salary = people10mupdates.salary
+                        WHEN NOT MATCHED
+                          THEN INSERT (
+                            id,
+                            firstName,
+                            middleName,
+                            lastName,
+                            gender,
+                            birthDate,
+                            ssn,
+                            salary
+                          )
+                          VALUES (
+                            people10mupdates.id,
+                            people10mupdates.firstName,
+                            people10mupdates.middleName,
+                            people10mupdates.lastName,
+                            people10mupdates.gender,
+                            people10mupdates.birthDate,
+                            people10mupdates.ssn,
+                            people10mupdates.salary
+                          """)
+
+
+# ### DELETE with MERGE
+
+# In[ ]:
+
+
+
+
+
+# ### Check after changes
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# ### DROP STAGING table after MERGE process successfully
+
+# In[ ]:
+
+
+
+
+
 # ### EXPLAIN statement is used to provide logical/physical plans
 
 # In[17]:
