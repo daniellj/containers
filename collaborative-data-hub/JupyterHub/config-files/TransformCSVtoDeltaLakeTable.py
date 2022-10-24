@@ -49,7 +49,7 @@ get_ipython().system('java -version')
 
 # ### Function to reduce memory usage in Pandas DataFrame
 
-# In[5]:
+# In[2]:
 
 
 import numpy as np
@@ -200,7 +200,7 @@ if sftp_file=="ratings.csv":
     print( "- correlation between rating and timestamp: ", data.corr("rating", "timestamp"), '\n' )
     print( "- covariance between rating and timestamp: ", data.cov("rating", "timestamp"), '\n' ) # Calculate the sample covariance for the given columns, specified by their names, as a double value
     print( "- descriptive statistics: ", data.describe(["userId", "movieId", "rating", "timestamp"]).show(), '\n' )
-#print( "- summary: ", data.summary(), '\n' ) # Computes specified statistics for numeric and string columns
+print( "- summary: ", data.summary().show(), '\n' ) # Computes specified statistics for numeric and string columns
 
 
 # ### Write DataFrame in HDFS
@@ -263,7 +263,7 @@ s_session.sql("select * from teste limit 10").show(truncate=False)
 
 # ### Connect from Apache Spark Cluster - with Delta Lake Session
 
-# In[2]:
+# In[3]:
 
 
 from pyspark import SparkConf, SparkContext
@@ -305,7 +305,7 @@ from delta import configure_spark_with_delta_pip, DeltaTable
 s_session_delta = configure_spark_with_delta_pip(spark_session_builder=builder).getOrCreate()
 
 
-# In[3]:
+# In[4]:
 
 
 from sys import version as sys_version
@@ -318,7 +318,7 @@ print(f'context hadoop version = {s_context_dl._jvm.org.apache.hadoop.util.Versi
 
 # ### Read .CSV from SFTP and load into a Pandas DataFrame - with Delta Lake Session
 
-# In[6]:
+# In[5]:
 
 
 import pysftp
@@ -372,9 +372,37 @@ with pysftp.Connection(environ["FTP_HOST"], port = int(environ["FTP_PORT"]), use
 connection.close()
 
 
+# ### Get Summary
+
+# In[10]:
+
+
+print( "- sparkSession: ", data_dl.sparkSession, '\n' )
+print("- Object: ", type(data_dl), "\n")
+print( "- schema: ", data_dl.schema, '\n' )
+print( "- printSchema: ", data_dl.printSchema(), '\n' )
+print( "- isStreaming: ", data_dl.isStreaming, '\n' )
+print( "- columns: ", data_dl.columns, '\n' )
+print( "- dtypes: ", data_dl.dtypes, '\n' )
+print( "- head: ", data_dl.head(10), '\n' )
+print( "- show: ", data_dl.show(10), '\n' )
+print( "- isEmpty: ", data_dl.isEmpty(), '\n' )
+print("- cache", data_dl.cache(), '\n' ) # Persists the DataFrame with the default storage level (MEMORY_AND_DISK)
+print( "- persist: ", data_dl.persist(), '\n' ) # Sets the storage level to persist the contents of the DataFrame across operations after the first time it is computed.
+print( "- storageLevel: ", data_dl.storageLevel, '\n' )
+print( "- count: ", data_dl.count(), '\n' )
+if sftp_file=="ratings.csv":
+    print( "- correlation between rating and timestamp: ", data_dl.corr("rating", "timestamp"), '\n' )
+    print( "- covariance between rating and timestamp: ", data_dl.cov("rating", "timestamp"), '\n' ) # Calculate the sample covariance for the given columns, specified by their names, as a double value
+    print( "- descriptive statistics: ", data_dl.describe(["userId", "movieId", "rating", "timestamp"]).show(), '\n' )
+elif sftp_file=="tags.csv":
+    print( "- descriptive statistics: ", data_dl.describe(["userId", "movieId", "tag", "timestamp"]).show(), '\n' )
+    print( "- summary: ", data_dl.summary().show(), '\n' ) # Computes specified statistics for numeric and string columns
+
+
 # ### Add new column
 
-# In[7]:
+# In[11]:
 
 
 data_dl = data_dl.withColumn("created_datetime", current_timestamp())
@@ -394,7 +422,7 @@ print( "- count: ", data_dl.count())
 
 # ### Create tables WITHOUT the metastore - Delta Lake
 
-# In[25]:
+# In[14]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -402,7 +430,7 @@ s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS silver LOCATION 'hdfs://hdpmast
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS gold LOCATION 'hdfs://hdpmaster:9000/deltalake/gold';")
 
 
-# In[ ]:
+# In[15]:
 
 
 s_session_delta.sql("""
@@ -432,19 +460,19 @@ CREATE TABLE IF NOT EXISTS bronze.ratings (
 #data_dl.createOrReplaceTempView("bronze.ratings")
 
 
-# In[9]:
+# In[ ]:
 
 
 s_session_delta.sql("SHOW DATABASES;").show()
 
 
-# In[10]:
+# In[ ]:
 
 
 s_session_delta.sql("SHOW SCHEMAS;").show()
 
 
-# In[11]:
+# In[ ]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED default""").head(20)
@@ -476,7 +504,7 @@ s_session_delta.sql("SHOW TABLE EXTENDED IN bronze like 'tags'").head(20)
 
 # ### Create tables WITH the metastore - Delta Lake
 
-# In[8]:
+# In[16]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -484,25 +512,25 @@ s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS silver LOCATION 'hdfs://hdpmast
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS gold LOCATION 'hdfs://hdpmaster:9000/deltalake/gold';")
 
 
-# In[26]:
+# In[17]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED bronze""").head(20)
 
 
-# In[49]:
+# In[18]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED silver""").head(20)
 
 
-# In[63]:
+# In[19]:
 
 
 s_session_delta.sql("""DESCRIBE SCHEMA EXTENDED gold""").head(20)
 
 
-# In[14]:
+# In[20]:
 
 
 # https://learn.microsoft.com/en-us/azure/databricks/delta/table-properties
@@ -510,7 +538,7 @@ s_session_delta.conf.set("delta.autoOptimize.autoCompact", "true")
 s_session_delta.conf.set("delta.autoOptimize.optimizeWrite", "true")
 
 
-# In[9]:
+# In[21]:
 
 
 # Create "bronze.tags" table in the metastore
@@ -532,7 +560,7 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
   .execute()
 
 
-# In[16]:
+# In[22]:
 
 
 # Create "bronze.ratings" table in the metastore
@@ -570,16 +598,22 @@ data_dl.write.format("delta").mode("append").saveAsTable(name='bronze.tags')
 
 # ### Read data in table - Delta Lake
 
-# In[78]:
+# In[23]:
 
 
 s_session_delta.sql("SELECT * FROM bronze.tags ORDER BY userId LIMIT 15;").show(15)
 
 
-# In[65]:
+# In[41]:
 
 
-s_session_delta.sql("SELECT COUNT(*) FROM bronze.tags;").show()
+df_from_sql = s_session_delta.read.table("bronze.tags")
+
+
+# In[42]:
+
+
+df_from_sql.select("userId", "movieId", "tag", "timestamp").summary().show()
 
 
 # ### Merge (UPSERT / DELETE)
