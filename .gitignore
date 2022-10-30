@@ -1,14 +1,29 @@
 # Private Files
 packages/*
+!packages/index.md
 
-Cluster_Hadoop/DataNode/binaries/hadoop/*
-Cluster_Hadoop/DataNode/binaries/jdk/*
-Cluster_Hadoop/NameNode/binaries/hadoop/*
-Cluster_Hadoop/NameNode/binaries/jdk/*
-!Cluster_Hadoop/DataNode/binaries/hadoop/index.md
-!Cluster_Hadoop/DataNode/binaries/jdk/index.md
-!Cluster_Hadoop/NameNode/binaries/hadoop/index.md
-!Cluster_Hadoop/NameNode/binaries/jdk/index.md
+metastore/ApacheHive/binaries/delta-lake/*
+metastore/ApacheHive/binaries/apache-hadoop/*
+metastore/ApacheHive/binaries/apache-hive/*
+metastore/ApacheHive/binaries/jdk/*
+metastore/ApacheHive/binaries/mysql/*
+metastore/ApacheHive/binaries/mysql/mysql-connector/*
+!metastore/ApacheHive/binaries/delta-lake/index.md
+!metastore/ApacheHive/binaries/apache-hive/index.md
+!metastore/ApacheHive/binaries/apache-hadoop/index.md
+!metastore/ApacheHive/binaries/jdk/index.md
+!metastore/ApacheHive/binaries/mysql/index.md
+!metastore/ApacheHive/binaries/mysql/mysql-connector/index.md
+!metastore/ApacheHive/binaries/mysql/mysql-connector/mysql-connector-j-8.0.31.jar
+
+cluster-hadoop/DataNode/binaries/hadoop/*
+cluster-hadoop/DataNode/binaries/jdk/*
+cluster-hadoop/NameNode/binaries/hadoop/*
+cluster-hadoop/NameNode/binaries/jdk/*
+!cluster-hadoop/DataNode/binaries/hadoop/index.md
+!cluster-hadoop/DataNode/binaries/jdk/index.md
+!cluster-hadoop/NameNode/binaries/hadoop/index.md
+!cluster-hadoop/NameNode/binaries/jdk/index.md
 
 CoordinationDistributedEnvironments/ApacheZookeeper/binaries/jdk/*
 !CoordinationDistributedEnvironments/ApacheZookeeper/binaries/jdk/index.md

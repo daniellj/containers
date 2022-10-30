@@ -5,10 +5,13 @@ docker build . --file=Dockerfile -t sftp:hadoop_cluster
 # Documentação do docker build:
 https://docs.docker.com/engine/reference/commandline/build/
 
-2- Precisaremos de uma rede. Verifique as redes disponíveis e então crie uma com as instruções abaixo:
+2- Precisaremos de uma rede. Verifique se há a rede "dfs_net" disponível, senão crie.
 
+# verificar redes disponíveis
 docker network ls
-docker network create dfs_net --subnet=172.19.0.0/16
+
+# criar a rede
+docker network create -d bridge dfs_net --subnet=172.19.0.0/16
 
 3- Crie e inicialize o container com a instrução abaixo:
 
@@ -18,8 +21,10 @@ docker run -it -d --net dfs_net --ip 172.19.0.15 --hostname sftp-01 --add-host=j
 # Documentação do doccker run:
 https://docs.docker.com/engine/reference/commandline/run/
 
-4- para acessar o container recém criado:
+4- Acesse o container usando qualquer terminar do seu S.O. e execute as instruções abaixo:
 docker container exec -it sftp-01 /bin/sh
 
 # verifica logs de execução master node
-tail -f -n500 
+tail -f -n500
+
+# A partir de um SFTP client, faça upload e download de um arquivo
