@@ -91,4 +91,4 @@ USER hive
 ENTRYPOINT ["/home/hive/entrypoint-startup.sh"]
 
 # Portas que poderão ser usadas
-EXPOSE 3306 9083
+EXPOSE 3306 9083 10002
