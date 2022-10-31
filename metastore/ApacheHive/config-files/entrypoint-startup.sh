@@ -38,12 +38,24 @@ if [ ! -f "$INIT_FILE" ]; then
 fi
 
 echo "#################################"
+echo "create apache-hive objects..."
+hive -v -f /opt/apache-hive/conf/create-hive-metadata-from-delta-lake.hql
+
+echo "#################################"
+echo "show apache-hive objects medatata..."
+sudo mysql --user=root --password=root --database metastore -e "USE metastore; select * from CTLGS; select * from DBS; select * from TBLS;"
+sudo mysql --user=root --password=root --database metastore -e "USE metastore; select DBS.CTLG_NAME as Catalog_Name, DBS.NAME as Schema_Name, DBS.DESC as Schema_Desc, DBS.DB_LOCATION_URI as Schema_Location, DBS.OWNER_NAME as Schema_Owner, DBS.OWNER_TYPE as Schema_Owner_Type, TBLS.TBL_TYPE as Table_Type, TBLS.TBL_NAME as Table_Name, TBLS.OWNER as Table_Owner, TBLS.OWNER_TYPE as Table_Owner_Type from TBLS INNER JOIN DBS ON TBLS.DB_ID = DBS.DB_ID;"
+
+echo "#################################"
 echo "-> start mysql service"
 sudo service mysql restart
 
 echo "#################################"
 echo "-> check status mysql status"
 sudo service mysql status
+
+echo "-> start metastore service..."
+nohup hive --service metastore &>/dev/null &
 
 echo "#################################"
 #Extra line added in the script to run all command line arguments

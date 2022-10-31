@@ -61,9 +61,11 @@ ADD ./config-files/update-root-password.sql /home/hive/update-root-password.sql
 ADD ./config-files/ssh_config /etc/ssh/ssh_config
 ADD ./config-files/entrypoint-startup.sh /home/hive/entrypoint-startup.sh
 ADD ./config-files/hive-site.xml /opt/apache-hive/conf/hive-site.xml
+ADD ./config-files/hive-env.sh /opt/apache-hive/conf/hive-env.sh
 ADD ./config-files/core-site.xml /opt/apache-hadoop/etc/hadoop/core-site.xml
 ADD ./config-files/hadoop-env.sh /opt/apache-hadoop/etc/hadoop/hadoop-env.sh
 ADD ./config-files/hdfs-site.xml /opt/apache-hadoop/etc/hadoop/hdfs-site.xml
+ADD ./config-files/create-hive-metadata-from-delta-lake.hql /opt/apache-hive/conf/create-hive-metadata-from-delta-lake.hql
 
 # Ajuste dos privilégios
 RUN sudo chown -R hive:hive /opt/jdk
@@ -77,9 +79,11 @@ RUN sudo sed -i -e 's/\r$//' /home/hive/update-root-password.sql
 RUN sudo sed -i -e 's/\r$//' /etc/ssh/ssh_config
 RUN sudo sed -i -e 's/\r$//' /home/hive/entrypoint-startup.sh
 RUN sudo sed -i -e 's/\r$//' /opt/apache-hive/conf/hive-site.xml
+RUN sudo sed -i -e 's/\r$//' /opt/apache-hive/conf/hive-env.sh
 RUN sudo sed -i -e 's/\r$//' /opt/apache-hadoop/etc/hadoop/core-site.xml
 RUN sudo sed -i -e 's/\r$//' /opt/apache-hadoop/etc/hadoop/hadoop-env.sh
 RUN sudo sed -i -e 's/\r$//' /opt/apache-hadoop/etc/hadoop/hdfs-site.xml
+RUN sudo sed -i -e 's/\r$//' /opt/apache-hive/conf/create-hive-metadata-from-delta-lake.hql
 
 # Muda o usuário
 USER hive
@@ -87,4 +91,4 @@ USER hive
 ENTRYPOINT ["/home/hive/entrypoint-startup.sh"]
 
 # Portas que poderão ser usadas
-EXPOSE 3306
+EXPOSE 3306 9083

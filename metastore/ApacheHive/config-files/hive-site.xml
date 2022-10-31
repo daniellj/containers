@@ -20,6 +20,11 @@
       <description>password for connecting to mysql server</description>
    </property>
    <property>
+      <name>hive.metastore.port</name>
+      <value>9083</value>
+      <description>Hive metastore listener port. (Hive 1.3.0 and later.)</description>
+   </property>
+   <property>
       <name>fs.default.name</name>
       <value>hdfs://hdpmaster:9000</value>
    </property>
