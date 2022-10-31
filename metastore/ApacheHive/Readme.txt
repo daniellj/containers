@@ -27,3 +27,6 @@ https://docs.docker.com/engine/reference/commandline/run/
 5- Acesse o container usando qualquer terminar do seu S.O. e execute as instruções abaixo:
 5.1 - para acessar o(s) container(s) recém criado(s):
 docker container exec -it metastore-hive /bin/bash
+
+6- Conectar na interface web do Apache Hive
+http://127.0.0.1:10002/

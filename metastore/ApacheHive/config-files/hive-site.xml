@@ -20,6 +20,11 @@
       <description>password for connecting to mysql server</description>
    </property>
    <property>
+      <name>hive.metastore.warehouse.dir</name>
+      <value>hdfs://hdpmaster:9000/deltalake/</value>
+      <description>Points to default location of non-external Hive tables in HDFS.</description>
+   </property>
+   <property>
       <name>hive.metastore.port</name>
       <value>9083</value>
       <description>Hive metastore listener port. (Hive 1.3.0 and later.)</description>
