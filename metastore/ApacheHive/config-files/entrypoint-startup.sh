@@ -58,7 +58,7 @@ echo "-> start METASTORE service..."
 nohup hive --service metastore &>/dev/null &
 
 echo "-> start WebUI hive service..."
-nohup hive --service hiveserver2 &>/dev/null &
+nohup hive --service hiveserver2 --hiveconf hive.root.logger=INFO,console &>/dev/null &
 
 echo "#################################"
 #Extra line added in the script to run all command line arguments

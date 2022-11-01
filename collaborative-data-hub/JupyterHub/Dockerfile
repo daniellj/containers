@@ -13,6 +13,7 @@ RUN \
   net-tools \
   iputils-ping \
   unzip \
+  libsasl2-dev \
   vim \
   && apt-get clean
 
@@ -87,7 +88,7 @@ ENV PATH=$PATH
 ENV PATH=$PATH:$JAVA_HOME:/opt/jdk/bin:/opt/jdk/sbin
 
 # install other python libraries
-RUN /srv/jupyterhub/bin/python -m pip install pyspark pandas numpy matplotlib scikit-learn statsmodels seaborn bokeh scrapy pysftp PyArrow
+RUN /srv/jupyterhub/bin/python -m pip install pyspark pandas numpy matplotlib scikit-learn statsmodels seaborn bokeh scrapy pysftp PyArrow pyhive thrift wheel thrift_sasl sasl
 
 # Muda o usuário
 USER jupyterhub

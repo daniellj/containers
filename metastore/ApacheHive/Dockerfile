@@ -13,6 +13,7 @@ RUN \
   arp-scan \
   net-tools \
   iputils-ping \
+  libsasl2-dev \
   vim \
   && apt-get clean
 
@@ -91,4 +92,4 @@ USER hive
 ENTRYPOINT ["/home/hive/entrypoint-startup.sh"]
 
 # Portas que poderão ser usadas
-EXPOSE 3306 9083 10002
+EXPOSE 3306 9083 10000 10001 10002
