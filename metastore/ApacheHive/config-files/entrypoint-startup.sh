@@ -41,7 +41,7 @@ fi
 
 echo "#################################"
 echo "create apache-hive objects..."
-sudo $HIVE_BIN/hive -v -f /opt/apache-hive/conf/create-hive-metadata-from-delta-lake.hql
+$HIVE_BIN/hive -v -f /opt/apache-hive/conf/create-hive-metadata-from-delta-lake.hql
 
 echo "#################################"
 echo "show apache-hive objects medatata..."
