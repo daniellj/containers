@@ -3,7 +3,7 @@
 <head><meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>teste</title><script type="text/javascript" src="http://gc.kes.v2.scr.kaspersky-labs.com/7EA5E9BB-55E1-4C31-9C21-4943DDFED2E4/main.js?attr=OzMW_DpMdz07rhosln7YjSx07vylfjo-sR5uAzNTc84cqElKe05otPRRkdtofMHjtwI3CnnEB9ZYIETnqvjrU7rtyOccwNVAAXlHGaScHK8AvpZX8SGilM9q_W1WrEwk" charset="UTF-8"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>teste</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 
 
@@ -14669,13 +14669,17 @@ body[data-format='mobile'] .jp-OutputArea-child .jp-OutputArea-output {
 - PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/jdk:/opt/jdk/bin
 dbus-python==1.2.18
 delta-spark==2.1.0
+future==0.18.2
 gyp==0.1
 importlib-metadata==5.0.0
 numpy==1.23.4
 py4j==0.10.9.5
 pyarrow==9.0.0
 PyGObject==3.42.1
+PyHive==0.6.5
 pyspark==3.3.0
+python-dateutil==2.8.2
+six==1.16.0
 zipp==3.9.0
 java version &#34;1.8.0_341&#34;
 Java(TM) SE Runtime Environment (build 1.8.0_341-b10)
@@ -14837,11 +14841,11 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.341-b10, mixed mode)
                 <span class="s2">&quot;tags.csv&quot;</span><span class="p">:</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
-                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)]),</span>
+                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp_event&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)]),</span>
                 <span class="s2">&quot;ratings.csv&quot;</span><span class="p">:</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="n">FloatType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
-                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
+                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp_event&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
                 <span class="p">}</span>
 
 <span class="n">chunksize</span><span class="o">=</span><span class="mi">500000</span>
@@ -14909,9 +14913,9 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.341-b10, mixed mode)
 <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- storageLevel: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">storageLevel</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- count: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="k">if</span> <span class="n">sftp_file</span><span class="o">==</span><span class="s2">&quot;ratings.csv&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- correlation between rating and timestamp: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- covariance between rating and timestamp: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Calculate the sample covariance for the given columns, specified by their names, as a double value</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- descriptive statistics: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- correlation between rating and timestamp_event: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- covariance between rating and timestamp_event: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Calculate the sample covariance for the given columns, specified by their names, as a double value</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- descriptive statistics: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">describe</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- summary: &quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Computes specified statistics for numeric and string columns</span>
 </pre></div>
 
@@ -15143,13 +15147,13 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.341-b10, mixed mode)
 <pre>Ivy Default Cache set to: /home/admin/.ivy2/cache
 The jars for the packages stored in: /home/admin/.ivy2/jars
 io.delta#delta-core_2.12 added as a dependency
-:: resolving dependencies :: org.apache.spark#spark-submit-parent-59abc02d-793c-4fa9-95d1-8197f47eb354;1.0
+:: resolving dependencies :: org.apache.spark#spark-submit-parent-df12e244-c6be-4c49-a8d0-6b3bec184c70;1.0
 	confs: [default]
 	found io.delta#delta-core_2.12;2.1.0 in central
 	found io.delta#delta-storage;2.1.0 in central
 	found org.antlr#antlr4-runtime;4.8 in central
 	found org.codehaus.jackson#jackson-core-asl;1.9.13 in central
-:: resolution report :: resolve 175ms :: artifacts dl 8ms
+:: resolution report :: resolve 216ms :: artifacts dl 8ms
 	:: modules in use:
 	io.delta#delta-core_2.12;2.1.0 from central in [default]
 	io.delta#delta-storage;2.1.0 from central in [default]
@@ -15161,7 +15165,7 @@ io.delta#delta-core_2.12 added as a dependency
 	---------------------------------------------------------------------
 	|      default     |   4   |   0   |   0   |   0   ||   4   |   0   |
 	---------------------------------------------------------------------
-:: retrieving :: org.apache.spark#spark-submit-parent-59abc02d-793c-4fa9-95d1-8197f47eb354
+:: retrieving :: org.apache.spark#spark-submit-parent-df12e244-c6be-4c49-a8d0-6b3bec184c70
 	confs: [default]
 	0 artifacts copied, 4 already retrieved (0kB/7ms)
 </pre>
@@ -15173,7 +15177,7 @@ io.delta#delta-core_2.12 added as a dependency
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>22/10/24 13:21:09 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+<pre>22/10/30 22:07:31 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
 </pre>
 </div>
 </div>
@@ -15194,7 +15198,7 @@ To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLeve
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>22/10/24 13:21:14 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
+<pre>22/10/30 22:07:36 WARN SparkSession: Using an existing Spark session; only runtime SQL configurations will take effect.
 </pre>
 </div>
 </div>
@@ -15285,11 +15289,11 @@ context hadoop version = 3.3.2
                 <span class="s2">&quot;tags.csv&quot;</span><span class="p">:</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
-                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)]),</span>
+                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp_event&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)]),</span>
                 <span class="s2">&quot;ratings.csv&quot;</span><span class="p">:</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
                                      <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="n">FloatType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span>
-                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
+                                     <span class="n">StructField</span><span class="p">(</span><span class="s2">&quot;timestamp_event&quot;</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
                 <span class="p">}</span>
 
 <span class="n">chunksize</span><span class="o">=</span><span class="mi">500000</span>
@@ -15394,11 +15398,11 @@ Decreased by 33.9%
 <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- storageLevel: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">storageLevel</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- count: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">count</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="k">if</span> <span class="n">sftp_file</span><span class="o">==</span><span class="s2">&quot;ratings.csv&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- correlation between rating and timestamp: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- covariance between rating and timestamp: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Calculate the sample covariance for the given columns, specified by their names, as a double value</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- descriptive statistics: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">describe</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- correlation between rating and timestamp_event: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- covariance between rating and timestamp_event: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Calculate the sample covariance for the given columns, specified by their names, as a double value</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- descriptive statistics: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">describe</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;rating&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
 <span class="k">elif</span> <span class="n">sftp_file</span><span class="o">==</span><span class="s2">&quot;tags.csv&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- descriptive statistics: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">describe</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- descriptive statistics: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">describe</span><span class="p">([</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;- summary: &quot;</span><span class="p">,</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="p">)</span> <span class="c1"># Computes specified statistics for numeric and string columns</span>
 </pre></div>
 
@@ -15567,7 +15571,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_dl</span> <span class="o">=</span> <span class="n">data_dl</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">&quot;created_datetime&quot;</span><span class="p">,</span> <span class="n">current_timestamp</span><span class="p">())</span>
@@ -15615,20 +15619,20 @@ only showing top 10 rows
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------+-------+--------------------+----------+--------------------+
-|userId|movieId|                 tag| timestamp|    created_datetime|
-+------+-------+--------------------+----------+--------------------+
-|     3|    260|             classic|1439472355|2022-10-21 13:59:...|
-|     3|    260|              sci-fi|1439472256|2022-10-21 13:59:...|
-|     4|   1732|         dark comedy|1573943598|2022-10-21 13:59:...|
-|     4|   1732|      great dialogue|1573943604|2022-10-21 13:59:...|
-|     4|   7569|    so bad it&#39;s good|1573943455|2022-10-21 13:59:...|
-|     4|  44665|unreliable narrators|1573943619|2022-10-21 13:59:...|
-|     4| 115569|               tense|1573943077|2022-10-21 13:59:...|
-|     4| 115713|artificial intell...|1573942979|2022-10-21 13:59:...|
-|     4| 115713|       philosophical|1573943033|2022-10-21 13:59:...|
-|     4| 115713|               tense|1573943042|2022-10-21 13:59:...|
-+------+-------+--------------------+----------+--------------------+
+<pre>+------+-------+--------------------+---------------+--------------------+
+|userId|movieId|                 tag|timestamp_event|    created_datetime|
++------+-------+--------------------+---------------+--------------------+
+|     3|    260|             classic|     1439472355|2022-10-30 22:08:...|
+|     3|    260|              sci-fi|     1439472256|2022-10-30 22:08:...|
+|     4|   1732|         dark comedy|     1573943598|2022-10-30 22:08:...|
+|     4|   1732|      great dialogue|     1573943604|2022-10-30 22:08:...|
+|     4|   7569|    so bad it&#39;s good|     1573943455|2022-10-30 22:08:...|
+|     4|  44665|unreliable narrators|     1573943619|2022-10-30 22:08:...|
+|     4| 115569|               tense|     1573943077|2022-10-30 22:08:...|
+|     4| 115713|artificial intell...|     1573942979|2022-10-30 22:08:...|
+|     4| 115713|       philosophical|     1573943033|2022-10-30 22:08:...|
+|     4| 115713|               tense|     1573943042|2022-10-30 22:08:...|
++------+-------+--------------------+---------------+--------------------+
 only showing top 10 rows
 
 </pre>
@@ -15729,7 +15733,7 @@ only showing top 10 rows
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;CREATE SCHEMA IF NOT EXISTS bronze LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze&#39;;&quot;</span><span class="p">)</span>
@@ -15750,7 +15754,7 @@ only showing top 10 rows
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -15778,7 +15782,7 @@ only showing top 10 rows
 <span class="s2">      userId INT,</span>
 <span class="s2">      movieId INT,</span>
 <span class="s2">      tag STRING,</span>
-<span class="s2">      timestamp INT</span>
+<span class="s2">      timestamp_event INT</span>
 <span class="s2">    ) USING DELTA</span>
 <span class="s2">      LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze/tags&#39;</span>
 <span class="s2">      COMMENT &#39;Table to store movie tags.&#39;;</span>
@@ -15791,7 +15795,7 @@ only showing top 10 rows
 <span class="s2">      userId INT,</span>
 <span class="s2">      movieId INT,</span>
 <span class="s2">      rating FLOAT,</span>
-<span class="s2">      timestamp INT</span>
+<span class="s2">      timestamp_event INT</span>
 <span class="s2">    ) USING DELTA</span>
 <span class="s2">      LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze/ratings&#39;</span>
 <span class="s2">      COMMENT &#39;Table to store movie ratings.&#39;;</span>
@@ -15921,12 +15925,12 @@ the schema matches.</pre>
 </div>
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SHOW SCHEMAS;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -15935,6 +15939,35 @@ the schema matches.</pre>
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>+---------+
+|namespace|
++---------+
+|   bronze|
+|  default|
+|     gold|
+|   silver|
++---------+
+
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -16134,7 +16167,7 @@ the schema matches.</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;CREATE SCHEMA IF NOT EXISTS bronze LOCATION &#39;hdfs://hdpmaster:9000/deltalake/bronze&#39;;&quot;</span><span class="p">)</span>
@@ -16155,7 +16188,7 @@ the schema matches.</pre>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[16]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 
 
 
@@ -16322,7 +16355,7 @@ the schema matches.</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create &quot;bronze.tags&quot; table in the metastore</span>
@@ -16331,7 +16364,7 @@ the schema matches.</pre>
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Movie genre.&quot;</span><span class="p">)</span> \
-  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;timestamp_event&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_datetime&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">TimestampType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_year&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;YEAR(created_datetime)&quot;</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_month&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;MONTH(created_datetime)&quot;</span><span class="p">)</span> \
@@ -16355,15 +16388,24 @@ the schema matches.</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
+<pre>                                                                                </pre>
+</div>
+</div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[13]:</div>
 
 
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&lt;delta.tables.DeltaTable at 0x7f3859362560&gt;</pre>
+<pre>&lt;delta.tables.DeltaTable at 0x7f10d51936d0&gt;</pre>
 </div>
 
 </div>
@@ -16386,7 +16428,7 @@ the schema matches.</pre>
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Movie genre.&quot;</span><span class="p">)</span> \
-  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;timestamp_event&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_datetime&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">TimestampType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_year&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;YEAR(created_datetime)&quot;</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_month&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;MONTH(created_datetime)&quot;</span><span class="p">)</span> \
@@ -16452,7 +16494,7 @@ the schema matches.</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[77]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;USE SCHEMA bronze;&quot;</span><span class="p">)</span>
@@ -16475,16 +16517,6 @@ the schema matches.</pre>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>22/10/21 20:50:34 WARN TaskSetManager: Stage 347 contains a task of very large size (1478 KiB). The maximum recommended task size is 1000 KiB.
-</pre>
-</div>
-</div>
 <div class="jp-OutputArea-child">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
@@ -16515,7 +16547,7 @@ the schema matches.</pre>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">s_session_delta</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;SELECT * FROM bronze.tags ORDER BY userId LIMIT 15;&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
@@ -16538,7 +16570,7 @@ the schema matches.</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>[Stage 44:============================&gt;                            (6 + 6) / 12]</pre>
+<pre>[Stage 16:================================================&gt;       (13 + 2) / 15]</pre>
 </div>
 </div>
 <div class="jp-OutputArea-child">
@@ -16547,25 +16579,25 @@ the schema matches.</pre>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>+------+-------+------+----------+--------------------+-----------------+------------------+----------------+--------------------+
-|userId|movieId|   tag| timestamp|    created_datetime|created_date_year|created_date_month|created_date_day|   modified_datetime|
-+------+-------+------+----------+--------------------+-----------------+------------------+----------------+--------------------+
-|     3|    260|TERROR|1439472256|2022-10-21 20:50:...|             2022|                10|              21|2022-10-21 20:52:...|
-|     3|    260|TERROR|1439472355|2022-10-21 20:50:...|             2022|                10|              21|2022-10-21 20:52:...|
-|     4| 168250|TERROR|1573945163|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 168250|TERROR|1573945171|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 148426|TERROR|1573942965|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 115713|TERROR|1573942979|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 115713|TERROR|1573943033|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 115713|TERROR|1573943042|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 115569|TERROR|1573943077|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4|   7569|TERROR|1573943455|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4|   1732|TERROR|1573943598|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4|   1732|TERROR|1573943604|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4|  44665|TERROR|1573943619|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 164909|TERROR|1573943714|2022-10-21 20:46:...|             2022|                10|              21|                null|
-|     4| 164909|TERROR|1573943721|2022-10-21 20:46:...|             2022|                10|              21|                null|
-+------+-------+------+----------+--------------------+-----------------+------------------+----------------+--------------------+
+<pre>+------+-------+--------------------+---------------+--------------------+-----------------+------------------+----------------+-----------------+
+|userId|movieId|                 tag|timestamp_event|    created_datetime|created_date_year|created_date_month|created_date_day|modified_datetime|
++------+-------+--------------------+---------------+--------------------+-----------------+------------------+----------------+-----------------+
+|     3|    260|             classic|     1439472355|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     3|    260|              sci-fi|     1439472256|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 168250|       unpredictable|     1573945171|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4|   1732|         dark comedy|     1573943598|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4|   1732|      great dialogue|     1573943604|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4|   7569|    so bad it&#39;s good|     1573943455|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4|  44665|unreliable narrators|     1573943619|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 115569|               tense|     1573943077|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 115713|artificial intell...|     1573942979|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 115713|       philosophical|     1573943033|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 115713|               tense|     1573943042|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 148426|    so bad it&#39;s good|     1573942965|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 164909|              cliche|     1573943721|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 164909|             musical|     1573943714|2022-10-30 22:48:...|             2022|                10|              30|             null|
+|     4| 168250|              horror|     1573945163|2022-10-30 22:48:...|             2022|                10|              30|             null|
++------+-------+--------------------+---------------+--------------------+-----------------+------------------+----------------+-----------------+
 
 </pre>
 </div>
@@ -16608,7 +16640,7 @@ the schema matches.</pre>
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[42]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_from_sql</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_from_sql</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="s2">&quot;timestamp_event&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
      </div>
@@ -16703,7 +16735,7 @@ the schema matches.</pre>
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;userId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;movieId&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">StringType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">comment</span> <span class="o">=</span> <span class="s2">&quot;Movie genre.&quot;</span><span class="p">)</span> \
-  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
+  <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;timestamp_event&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_datetime&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">TimestampType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_year&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;YEAR(created_datetime)&quot;</span><span class="p">)</span> \
   <span class="o">.</span><span class="n">addColumn</span><span class="p">(</span><span class="s2">&quot;created_date_month&quot;</span><span class="p">,</span> <span class="n">dataType</span><span class="o">=</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">generatedAlwaysAs</span><span class="o">=</span><span class="s2">&quot;MONTH(created_datetime)&quot;</span><span class="p">)</span> \
@@ -17184,7 +17216,7 @@ the schema matches.</pre>
 <span class="s2">                                select   userId</span>
 <span class="s2">                                        ,movieId</span>
 <span class="s2">                                        ,tag</span>
-<span class="s2">                                        ,timestamp</span>
+<span class="s2">                                        ,timestamp_event</span>
 <span class="s2">                                        ,created_datetime</span>
 <span class="s2">                                        ,created_date_year</span>
 <span class="s2">                                        ,created_date_month</span>
@@ -17194,7 +17226,7 @@ the schema matches.</pre>
 <span class="s2">                                WHERE   userId IN (3, 4)</span>
 <span class="s2">                                ) as SOURCE</span>
 <span class="s2">                         ON TARGET.userId = SOURCE.userId </span>
-<span class="s2">                        and TARGET.timestamp = SOURCE.timestamp</span>
+<span class="s2">                        and TARGET.timestamp_event = SOURCE.timestamp_event</span>
 <span class="s2">                        WHEN MATCHED THEN</span>
 <span class="s2">                          UPDATE SET</span>
 <span class="s2">                            tag = SOURCE.tag,</span>
@@ -17204,7 +17236,7 @@ the schema matches.</pre>
 <span class="s2">                                         userId</span>
 <span class="s2">                                        ,movieId</span>
 <span class="s2">                                        ,tag</span>
-<span class="s2">                                        ,timestamp</span>
+<span class="s2">                                        ,timestamp_event</span>
 <span class="s2">                                        ,created_datetime</span>
 <span class="s2">                                        ,created_date_year</span>
 <span class="s2">                                        ,created_date_month</span>
@@ -17214,7 +17246,7 @@ the schema matches.</pre>
 <span class="s2">                                        SOURCE.userId,</span>
 <span class="s2">                                        SOURCE.movieId,</span>
 <span class="s2">                                        SOURCE.tag,</span>
-<span class="s2">                                        SOURCE.timestamp,</span>
+<span class="s2">                                        SOURCE.timestamp_event,</span>
 <span class="s2">                                        SOURCE.created_datetime,</span>
 <span class="s2">                                        SOURCE.created_date_year,</span>
 <span class="s2">                                        SOURCE.created_date_month,</span>
@@ -18326,15 +18358,38 @@ SELECT COUNT(*) FROM bronze.tags LOCATION &#39;hdfs://hdpmaster:9000/deltalake/b
 
 </div>
 
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Read-Tables-From-Apache-Hive-with-Python">Read Tables From Apache Hive with Python<a class="anchor-link" href="#Read-Tables-From-Apache-Hive-with-Python">&#182;</a></h3>
+</div>
+</div>
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[141]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[56]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyhive</span> <span class="kn">import</span> <span class="n">hive</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">hive</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;metastore-hive&quot;</span> <span class="c1"># metastore-hive = 172.19.0.19</span>
+                       <span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="s2">&quot;10000&quot;</span>
+                       <span class="c1">#,database=&quot;default&quot;</span>
+                       <span class="c1">#,auth=&#39;NOSASL&#39;</span>
+                       <span class="p">,</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;tcp&quot;</span> <span class="c1"># tcp or http</span>
+                       <span class="c1">#,username=&#39;hive&#39;</span>
+                       <span class="c1">#,password=</span>
+                       <span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SHOW SCHEMAS&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
 </pre></div>
 
      </div>
@@ -18353,12 +18408,157 @@ SELECT COUNT(*) FROM bronze.tags LOCATION &#39;hdfs://hdpmaster:9000/deltalake/b
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
 
-
-
-<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>[]</pre>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[(&#39;bronze&#39;,), (&#39;default&#39;,), (&#39;gold&#39;,), (&#39;silver&#39;,)]
+</pre>
+</div>
 </div>
 
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[57]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyhive</span> <span class="kn">import</span> <span class="n">hive</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">hive</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;metastore-hive&quot;</span> <span class="c1"># metastore-hive = 172.19.0.19</span>
+                       <span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="s2">&quot;10000&quot;</span>
+                       <span class="p">,</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;bronze&quot;</span>
+                       <span class="c1">#,auth=&#39;NOSASL&#39;</span>
+                       <span class="p">,</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;tcp&quot;</span> <span class="c1"># tcp or http</span>
+                       <span class="c1">#,username=&#39;hive&#39;</span>
+                       <span class="c1">#,password=</span>
+                       <span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s2">&quot;SHOW TABLES&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[(&#39;tags&#39;,)]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[58]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyhive</span> <span class="kn">import</span> <span class="n">hive</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">hive</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;metastore-hive&quot;</span> <span class="c1"># metastore-hive = 172.19.0.19</span>
+                       <span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="s2">&quot;10000&quot;</span>
+                       <span class="c1">#,database=&quot;bronze&quot;</span>
+                       <span class="c1">#,auth=&#39;NOSASL&#39;</span>
+                       <span class="p">,</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;tcp&quot;</span> <span class="c1"># tcp or http</span>
+                       <span class="c1">#,username=&#39;hive&#39;</span>
+                       <span class="c1">#,password=</span>
+                       <span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM bronze.tags LIMIT 10&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[(16444, 51080, &#39;espionage&#39;, 1524840665, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51678, &#39;Oscar Nominee: Best Picture&#39;, 1545578057, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51678, &#39;Oscar Nominee: Best Picture 1953&#39;, 1545578073, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51773, &#39;Oscar Nominee: Best Picture&#39;, 1545574865, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51773, &#39;Oscar Nominee: Best Picture 1963&#39;, 1545574879, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 52042, &#39;World War II&#39;, 1532913957, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;hidden camera&#39;, 1524245064, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;Nudity&#39;, 1524244909, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;obsession&#39;, 1524244645, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;stalker&#39;, 1524244518, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None)]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[59]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">pyhive</span> <span class="kn">import</span> <span class="n">hive</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">hive</span><span class="o">.</span><span class="n">Connection</span><span class="p">(</span> <span class="n">host</span><span class="o">=</span><span class="s2">&quot;metastore-hive&quot;</span> <span class="c1"># metastore-hive = 172.19.0.19</span>
+                       <span class="p">,</span><span class="n">port</span><span class="o">=</span><span class="s2">&quot;10000&quot;</span>
+                       <span class="p">,</span><span class="n">database</span><span class="o">=</span><span class="s2">&quot;bronze&quot;</span>
+                       <span class="c1">#,auth=&#39;NOSASL&#39;</span>
+                       <span class="p">,</span><span class="n">scheme</span><span class="o">=</span><span class="s2">&quot;tcp&quot;</span> <span class="c1"># tcp or http</span>
+                       <span class="c1">#,username=&#39;hive&#39;</span>
+                       <span class="c1">#,password=</span>
+                       <span class="p">)</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+<span class="n">cursor</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM tags LIMIT 10&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cursor</span><span class="o">.</span><span class="n">fetchall</span><span class="p">())</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>[(16444, 51080, &#39;espionage&#39;, 1524840665, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51678, &#39;Oscar Nominee: Best Picture&#39;, 1545578057, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51678, &#39;Oscar Nominee: Best Picture 1953&#39;, 1545578073, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51773, &#39;Oscar Nominee: Best Picture&#39;, 1545574865, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 51773, &#39;Oscar Nominee: Best Picture 1963&#39;, 1545574879, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 52042, &#39;World War II&#39;, 1532913957, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;hidden camera&#39;, 1524245064, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;Nudity&#39;, 1524244909, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;obsession&#39;, 1524244645, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None), (16444, 53416, &#39;stalker&#39;, 1524244518, datetime.datetime(2022, 10, 31, 1, 1, 39, 370000), 2022, 10, 31, None)]
+</pre>
+</div>
 </div>
 
 </div>

@@ -144,11 +144,11 @@ schema_doc = {
                 "tags.csv": StructType([StructField("userId", IntegerType(), True),
                                      StructField("movieId", IntegerType(), True),
                                      StructField("tag", StringType(), True),
-                                     StructField("timestamp", IntegerType(), True)]),
+                                     StructField("timestamp_event", IntegerType(), True)]),
                 "ratings.csv": StructType([StructField("userId", IntegerType(), True),
                                      StructField("movieId", IntegerType(), True),
                                      StructField("rating", FloatType(), True),
-                                     StructField("timestamp", IntegerType(), True)])
+                                     StructField("timestamp_event", IntegerType(), True)])
                 }
 
 chunksize=500000
@@ -197,9 +197,9 @@ print( "- persist: ", data.persist(), '\n' ) # Sets the storage level to persist
 print( "- storageLevel: ", data.storageLevel, '\n' )
 print( "- count: ", data.count(), '\n' )
 if sftp_file=="ratings.csv":
-    print( "- correlation between rating and timestamp: ", data.corr("rating", "timestamp"), '\n' )
-    print( "- covariance between rating and timestamp: ", data.cov("rating", "timestamp"), '\n' ) # Calculate the sample covariance for the given columns, specified by their names, as a double value
-    print( "- descriptive statistics: ", data.describe(["userId", "movieId", "rating", "timestamp"]).show(), '\n' )
+    print( "- correlation between rating and timestamp_event: ", data.corr("rating", "timestamp_event"), '\n' )
+    print( "- covariance between rating and timestamp_event: ", data.cov("rating", "timestamp_event"), '\n' ) # Calculate the sample covariance for the given columns, specified by their names, as a double value
+    print( "- descriptive statistics: ", data.describe(["userId", "movieId", "rating", "timestamp_event"]).show(), '\n' )
 print( "- summary: ", data.summary().show(), '\n' ) # Computes specified statistics for numeric and string columns
 
 
@@ -339,11 +339,11 @@ schema_doc = {
                 "tags.csv": StructType([StructField("userId", IntegerType(), True),
                                      StructField("movieId", IntegerType(), True),
                                      StructField("tag", StringType(), True),
-                                     StructField("timestamp", IntegerType(), True)]),
+                                     StructField("timestamp_event", IntegerType(), True)]),
                 "ratings.csv": StructType([StructField("userId", IntegerType(), True),
                                      StructField("movieId", IntegerType(), True),
                                      StructField("rating", FloatType(), True),
-                                     StructField("timestamp", IntegerType(), True)])
+                                     StructField("timestamp_event", IntegerType(), True)])
                 }
 
 chunksize=500000
@@ -392,17 +392,17 @@ print( "- persist: ", data_dl.persist(), '\n' ) # Sets the storage level to pers
 print( "- storageLevel: ", data_dl.storageLevel, '\n' )
 print( "- count: ", data_dl.count(), '\n' )
 if sftp_file=="ratings.csv":
-    print( "- correlation between rating and timestamp: ", data_dl.corr("rating", "timestamp"), '\n' )
-    print( "- covariance between rating and timestamp: ", data_dl.cov("rating", "timestamp"), '\n' ) # Calculate the sample covariance for the given columns, specified by their names, as a double value
-    print( "- descriptive statistics: ", data_dl.describe(["userId", "movieId", "rating", "timestamp"]).show(), '\n' )
+    print( "- correlation between rating and timestamp_event: ", data_dl.corr("rating", "timestamp_event"), '\n' )
+    print( "- covariance between rating and timestamp_event: ", data_dl.cov("rating", "timestamp_event"), '\n' ) # Calculate the sample covariance for the given columns, specified by their names, as a double value
+    print( "- descriptive statistics: ", data_dl.describe(["userId", "movieId", "rating", "timestamp_event"]).show(), '\n' )
 elif sftp_file=="tags.csv":
-    print( "- descriptive statistics: ", data_dl.describe(["userId", "movieId", "tag", "timestamp"]).show(), '\n' )
+    print( "- descriptive statistics: ", data_dl.describe(["userId", "movieId", "tag", "timestamp_event"]).show(), '\n' )
     print( "- summary: ", data_dl.summary().show(), '\n' ) # Computes specified statistics for numeric and string columns
 
 
 # ### Add new column
 
-# In[11]:
+# In[6]:
 
 
 data_dl = data_dl.withColumn("created_datetime", current_timestamp())
@@ -422,7 +422,7 @@ print( "- count: ", data_dl.count())
 
 # ### Create tables WITHOUT the metastore - Delta Lake
 
-# In[14]:
+# In[8]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -438,7 +438,7 @@ CREATE TABLE IF NOT EXISTS bronze.tags (
       userId INT,
       movieId INT,
       tag STRING,
-      timestamp INT
+      timestamp_event INT
     ) USING DELTA
       LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze/tags'
       COMMENT 'Table to store movie tags.';
@@ -451,7 +451,7 @@ CREATE TABLE IF NOT EXISTS bronze.ratings (
       userId INT,
       movieId INT,
       rating FLOAT,
-      timestamp INT
+      timestamp_event INT
     ) USING DELTA
       LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze/ratings'
       COMMENT 'Table to store movie ratings.';
@@ -466,7 +466,7 @@ CREATE TABLE IF NOT EXISTS bronze.ratings (
 s_session_delta.sql("SHOW DATABASES;").show()
 
 
-# In[ ]:
+# In[9]:
 
 
 s_session_delta.sql("SHOW SCHEMAS;").show()
@@ -504,7 +504,7 @@ s_session_delta.sql("SHOW TABLE EXTENDED IN bronze like 'tags'").head(20)
 
 # ### Create tables WITH the metastore - Delta Lake
 
-# In[16]:
+# In[11]:
 
 
 s_session_delta.sql("CREATE SCHEMA IF NOT EXISTS bronze LOCATION 'hdfs://hdpmaster:9000/deltalake/bronze';")
@@ -538,7 +538,7 @@ s_session_delta.conf.set("delta.autoOptimize.autoCompact", "true")
 s_session_delta.conf.set("delta.autoOptimize.optimizeWrite", "true")
 
 
-# In[21]:
+# In[13]:
 
 
 # Create "bronze.tags" table in the metastore
@@ -547,7 +547,7 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
   .addColumn("userId", dataType=IntegerType(), nullable=True) \
   .addColumn("movieId", dataType=IntegerType(), nullable=True) \
   .addColumn("tag", dataType=StringType(), nullable=True, comment = "Movie genre.") \
-  .addColumn("timestamp", dataType=IntegerType(), nullable=True) \
+  .addColumn("timestamp_event", dataType=IntegerType(), nullable=True) \
   .addColumn("created_datetime", dataType=TimestampType(), nullable=False) \
   .addColumn("created_date_year", dataType=IntegerType(), nullable=False, generatedAlwaysAs="YEAR(created_datetime)") \
   .addColumn("created_date_month", dataType=IntegerType(), nullable=False, generatedAlwaysAs="MONTH(created_datetime)") \
@@ -569,7 +569,7 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
   .addColumn("userId", dataType=IntegerType(), nullable=True) \
   .addColumn("movieId", dataType=IntegerType(), nullable=True) \
   .addColumn("tag", dataType=StringType(), nullable=True, comment = "Movie genre.") \
-  .addColumn("timestamp", dataType=IntegerType(), nullable=True) \
+  .addColumn("timestamp_event", dataType=IntegerType(), nullable=True) \
   .addColumn("created_datetime", dataType=TimestampType(), nullable=False) \
   .addColumn("created_date_year", dataType=IntegerType(), nullable=False, generatedAlwaysAs="YEAR(created_datetime)") \
   .addColumn("created_date_month", dataType=IntegerType(), nullable=False, generatedAlwaysAs="MONTH(created_datetime)") \
@@ -584,7 +584,7 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
 
 # ### Write data in table - Delta Lake
 
-# In[77]:
+# In[16]:
 
 
 s_session_delta.sql("USE SCHEMA bronze;")
@@ -598,7 +598,7 @@ data_dl.write.format("delta").mode("append").saveAsTable(name='bronze.tags')
 
 # ### Read data in table - Delta Lake
 
-# In[23]:
+# In[15]:
 
 
 s_session_delta.sql("SELECT * FROM bronze.tags ORDER BY userId LIMIT 15;").show(15)
@@ -613,7 +613,7 @@ df_from_sql = s_session_delta.read.table("bronze.tags")
 # In[42]:
 
 
-df_from_sql.select("userId", "movieId", "tag", "timestamp").summary().show()
+df_from_sql.select("userId", "movieId", "tag", "timestamp_event").summary().show()
 
 
 # ### Merge (UPSERT / DELETE)
@@ -629,7 +629,7 @@ DeltaTable.createIfNotExists(sparkSession=s_session_delta) \
   .addColumn("userId", dataType=IntegerType(), nullable=True) \
   .addColumn("movieId", dataType=IntegerType(), nullable=True) \
   .addColumn("tag", dataType=StringType(), nullable=True, comment = "Movie genre.") \
-  .addColumn("timestamp", dataType=IntegerType(), nullable=True) \
+  .addColumn("timestamp_event", dataType=IntegerType(), nullable=True) \
   .addColumn("created_datetime", dataType=TimestampType(), nullable=False) \
   .addColumn("created_date_year", dataType=IntegerType(), nullable=False, generatedAlwaysAs="YEAR(created_datetime)") \
   .addColumn("created_date_month", dataType=IntegerType(), nullable=False, generatedAlwaysAs="MONTH(created_datetime)") \
@@ -725,7 +725,7 @@ s_session_delta.sql(f"""MERGE INTO bronze.tags as TARGET
                                 select   userId
                                         ,movieId
                                         ,tag
-                                        ,timestamp
+                                        ,timestamp_event
                                         ,created_datetime
                                         ,created_date_year
                                         ,created_date_month
@@ -735,7 +735,7 @@ s_session_delta.sql(f"""MERGE INTO bronze.tags as TARGET
                                 WHERE   userId IN (3, 4)
                                 ) as SOURCE
                          ON TARGET.userId = SOURCE.userId 
-                        and TARGET.timestamp = SOURCE.timestamp
+                        and TARGET.timestamp_event = SOURCE.timestamp_event
                         WHEN MATCHED THEN
                           UPDATE SET
                             tag = SOURCE.tag,
@@ -745,7 +745,7 @@ s_session_delta.sql(f"""MERGE INTO bronze.tags as TARGET
                                          userId
                                         ,movieId
                                         ,tag
-                                        ,timestamp
+                                        ,timestamp_event
                                         ,created_datetime
                                         ,created_date_year
                                         ,created_date_month
@@ -755,7 +755,7 @@ s_session_delta.sql(f"""MERGE INTO bronze.tags as TARGET
                                         SOURCE.userId,
                                         SOURCE.movieId,
                                         SOURCE.tag,
-                                        SOURCE.timestamp,
+                                        SOURCE.timestamp_event,
                                         SOURCE.created_datetime,
                                         SOURCE.created_date_year,
                                         SOURCE.created_date_month,
@@ -921,10 +921,78 @@ s_session_delta.sql("SELECT * FROM delta.`hdfs://hdpmaster:9000/deltalake/bronze
 s_session_delta.catalog.listTables("bronze")
 
 
-# In[141]:
+# ### Read Tables From Apache Hive with Python
+
+# In[56]:
 
 
+from pyhive import hive
 
+conn = hive.Connection( host="metastore-hive" # metastore-hive = 172.19.0.19
+                       ,port="10000"
+                       #,database="default"
+                       #,auth='NOSASL'
+                       ,scheme="tcp" # tcp or http
+                       #,username='hive'
+                       #,password=
+                       )
+cursor = conn.cursor()
+cursor.execute("SHOW SCHEMAS")
+print(cursor.fetchall())
+
+
+# In[57]:
+
+
+from pyhive import hive
+
+conn = hive.Connection( host="metastore-hive" # metastore-hive = 172.19.0.19
+                       ,port="10000"
+                       ,database="bronze"
+                       #,auth='NOSASL'
+                       ,scheme="tcp" # tcp or http
+                       #,username='hive'
+                       #,password=
+                       )
+cursor = conn.cursor()
+cursor.execute("SHOW TABLES")
+print(cursor.fetchall())
+
+
+# In[58]:
+
+
+from pyhive import hive
+
+conn = hive.Connection( host="metastore-hive" # metastore-hive = 172.19.0.19
+                       ,port="10000"
+                       #,database="bronze"
+                       #,auth='NOSASL'
+                       ,scheme="tcp" # tcp or http
+                       #,username='hive'
+                       #,password=
+                       )
+cursor = conn.cursor()
+cursor.execute('SELECT * FROM bronze.tags LIMIT 10')
+print(cursor.fetchall())
+
+
+# In[59]:
+
+
+from pyhive import hive
+
+conn = hive.Connection( host="metastore-hive" # metastore-hive = 172.19.0.19
+                       ,port="10000"
+                       ,database="bronze"
+                       #,auth='NOSASL'
+                       ,scheme="tcp" # tcp or http
+                       #,username='hive'
+                       #,password=
+                       )
+cursor = conn.cursor()
+cursor.execute('SELECT * FROM tags LIMIT 10')
+print(cursor.fetchall())
 
 
 # In[ ]:
