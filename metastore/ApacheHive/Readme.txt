@@ -28,5 +28,12 @@ https://docs.docker.com/engine/reference/commandline/run/
 5.1 - para acessar o(s) container(s) recém criado(s):
 docker container exec -it metastore-hive /bin/bash
 
+6- Verificar serviços:
+Hiserver:
+tail -f -n300 /home/hive/hiveserver2.log
+
+- Metastore:
+tail -f -n300 /home/hive/metastore.log
+
 6- Conectar na interface web do Apache Hive # 9083 -> metadata server | 10000 -> hiveserver2 TCP | 10001 -> hiveserver2 HTTP | 10002 -> hiveserver2 Web Interface
 http://127.0.0.1:10002/

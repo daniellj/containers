@@ -25,6 +25,21 @@
       <description>Points to default location of non-external Hive tables in HDFS.</description>
    </property>
    <property>
+      <name>hive.server2.thrift.bind.host</name>
+      <value>localhost</value>
+      <description>TCP interface to bind to.</description>
+   </property>
+   <property>
+      <name>hive.server2.thrift.port</name>
+      <value>10000</value>
+      <description>TCP port number to listen on.</description>
+   </property>
+   <property>
+      <name>hive.server2.thrift.http.port</name>
+      <value>10001</value>
+      <description>HTTP port number to listen on.</description>
+   </property>
+   <property>
       <name>hive.server2.authentication</name>
       <value>NONE</value>
       <description>Authentication mode, default NONE. Options are NONE (uses plain SASL), NOSASL, KERBEROS, LDAP, PAM and CUSTOM.</description>
@@ -33,6 +48,11 @@
       <name>hive.server2.enable.doAs</name>
       <value>false</value>
       <description>HiveServer2 performs the query processing as the user who submitted the query.</description>
+   </property>
+   <property>
+       <name>hive.metastore.uris</name>
+       <value>thrift://localhost:9083</value>
+   	<description>Hive metastore URL</description>
    </property>
    <property>
       <name>hive.metastore.port</name>

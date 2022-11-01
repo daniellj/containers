@@ -3,15 +3,17 @@
 echo "#################################"
 echo "export environment variables"
 # java
-echo export JAVA_HOME=/opt/jdk
+export JAVA_HOME=/opt/jdk
 # apache-hadoop
-echo export HADOOP_HOME=/opt/apache-hadoop
-echo export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
-echo export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
+export HADOOP_HOME=/opt/apache-hadoop
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export LD_LIBRARY_PATH=$HADOOP_HOME/lib/native
 # apache hive
-echo export HIVE_HOME=/opt/apache-hive
-echo export HIVE_AUX_JARS_PATH=/opt/apache-hive/lib
-echo export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$HIVE_HOME:$HIVE_HOME/bin:$HIVE_AUX_JARS_PATH:$HADOOP_HOME:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_COMMON_LIB_NATIVE_DIR:$LD_LIBRARY_PATH
+export HIVE_HOME=/opt/apache-hive
+export HIVE_AUX_JARS_PATH=/opt/apache-hive/lib
+export PATH=$PATH:$JAVA_HOME:$JAVA_HOME/bin:$HIVE_HOME:$HIVE_HOME/bin:$HIVE_AUX_JARS_PATH:$HADOOP_HOME:$HADOOP_HOME/bin:$HADOOP_HOME/sbin:$HADOOP_COMMON_LIB_NATIVE_DIR:$LD_LIBRARY_PATH
+
+HIVE_BIN=/opt/apache-hive/bin
 
 # update root password + create database objects if is the first time the container is started
 INIT_FILE=/home/hive/initialized.log
@@ -39,7 +41,7 @@ fi
 
 echo "#################################"
 echo "create apache-hive objects..."
-hive -v -f /opt/apache-hive/conf/create-hive-metadata-from-delta-lake.hql
+sudo $HIVE_BIN/hive -v -f /opt/apache-hive/conf/create-hive-metadata-from-delta-lake.hql
 
 echo "#################################"
 echo "show apache-hive objects medatata..."
@@ -55,10 +57,10 @@ echo "-> check status mysql status"
 sudo service mysql status
 
 echo "-> start METASTORE service..."
-nohup hive --service metastore &>/dev/null &
+nohup $HIVE_BIN/hive --service metastore --hiveconf hive.root.logger=INFO,console > /home/hive/metastore.log &
 
-echo "-> start WebUI hive service..."
-nohup hive --service hiveserver2 --hiveconf hive.root.logger=INFO,console &>/dev/null &
+echo "-> start hive SERVER + WebUI..."
+nohup $HIVE_BIN/hive --service hiveserver2 --hiveconf hive.root.logger=INFO,console > /home/hive/hiveserver2.log &
 
 echo "#################################"
 #Extra line added in the script to run all command line arguments
