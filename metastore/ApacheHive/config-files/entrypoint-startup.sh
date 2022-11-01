@@ -62,6 +62,22 @@ nohup $HIVE_BIN/hive --service metastore --hiveconf hive.root.logger=INFO,consol
 echo "-> start hive SERVER + WebUI..."
 nohup $HIVE_BIN/hive --service hiveserver2 --hiveconf hive.root.logger=INFO,console > /home/hive/hiveserver2.log &
 
+echo "-> check status Hive METASTORE + SERVER + WebUI..."
+jps
+ps -aux
+echo ""
+echo "METASTORE Log..."
+tail -n100 /home/hive/metastore.log
+echo "METASTORE listening..."
+netstat -vanpt | grep 0.0.0.0:9083
+echo ""
+echo "HIVESERVER Log..."
+tail -n100 /home/hive/hiveserver2.log
+echo "HIVESERVER listening..."
+netstat -vanpt | grep 0.0.0.0:10000
+echo "HIVESERVER Web UI listening..."
+netstat -vanpt | grep 0.0.0.0:10002
+
 echo "#################################"
 #Extra line added in the script to run all command line arguments
 exec "$@";
